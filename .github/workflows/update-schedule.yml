@@ -1,0 +1,44 @@
+name: トライアスロンスケジュール自動更新
+
+on:
+  # 毎日 6:00 JST (21:00 UTC) に自動実行
+  schedule:
+    - cron: "0 21 * * *"
+
+  # 手動でも実行できる
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 依存パッケージをインストール
+        run: pip install -r requirements.txt
+
+      - name: スケジュール取得 & HTML生成（AI解析）
+        env:
+          # GitHub リポジトリの Settings → Secrets → Actions に登録する
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python triathlon_fetcher.py
+
+      - name: 変更をコミット & プッシュ
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add index.html
+          git diff --staged --quiet || git commit -m "chore: スケジュール自動更新 $(date +'%Y-%m-%d' --date='9 hours')"
+          git push
