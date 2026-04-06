@@ -33,6 +33,9 @@ jobs:
       - name: 依存パッケージをインストール
         run: pip install -r requirements.txt
 
+      - name: 最新の状態に更新
+        run: git pull --rebase
+
       - name: スケジュール取得 & HTML生成（AI解析）
         env:
           # GitHub リポジトリの Settings → Secrets → Actions に登録する
@@ -45,5 +48,4 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add index.html
           git diff --staged --quiet || git commit -m "chore: スケジュール自動更新 $(date +'%Y-%m-%d' --date='9 hours')"
-          git pull --rebase
           git push
