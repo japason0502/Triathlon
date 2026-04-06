@@ -208,3 +208,6 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# triathlon_fetcher.py が生成する（サイトは GitHub Actions → Pages にデプロイ）
+index.html
