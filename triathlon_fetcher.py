@@ -4,7 +4,6 @@
 GitHub Actions で定期実行し、index.html を自動更新します。
 
 対応ソース:
-  - connpass API (構造化APIなのでAI不要)
   - サイクルショップエンドウ (AI解析)
   - Triathlon LUMINA / イベントインフォメーション (AI解析)
 
@@ -17,7 +16,6 @@ import os
 import re
 import sys
 import urllib.request
-import urllib.parse
 import datetime
 import html as html_module
 
@@ -37,8 +35,6 @@ except ImportError:
 # ═══════════════════════════════════════════════════════
 # 設定
 # ═══════════════════════════════════════════════════════
-CONNPASS_KEYWORDS = ["トライアスロン", "triathlon"]
-CONNPASS_COUNT    = 50
 OUTPUT_FILE       = "index.html"
 AI_MODEL          = "claude-haiku-4-5-20251001"   # 安くて速い
 
@@ -225,48 +221,6 @@ def fetch_ai_site_events(target: dict) -> list:
 
 
 # ──────────────────────────────────────────────────────
-# ① connpass（APIなのでAI不要）
-# ──────────────────────────────────────────────────────
-
-def fetch_connpass_events(keyword: str, count: int = 20) -> list:
-    base_url = "https://connpass.com/api/v1/event/"
-    params   = urllib.parse.urlencode({"keyword": keyword, "count": count, "order": 2})
-    try:
-        req = urllib.request.Request(f"{base_url}?{params}", headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=15) as res:
-            return json.loads(res.read().decode("utf-8")).get("events", [])
-    except Exception as e:
-        print(f"[WARNING] connpass取得エラー ({keyword}): {e}", file=sys.stderr)
-        return []
-
-
-def parse_connpass_event(ev: dict) -> dict:
-    started_at = ev.get("started_at", "")
-    try:
-        dt      = datetime.datetime.fromisoformat(started_at.replace("Z","+00:00")).astimezone(JST)
-        date_str = dt.strftime("%Y/%m/%d")
-        time_str = dt.strftime("%H:%M")
-        weekday  = ["月","火","水","木","金","土","日"][dt.weekday()]
-        sort_key = dt.isoformat()
-    except Exception:
-        date_str = started_at[:10] if started_at else "未定"
-        time_str = weekday = ""
-        sort_key = started_at
-    return {
-        "title":    ev.get("title",""),
-        "date":     date_str,
-        "time":     time_str,
-        "weekday":  weekday,
-        "place":    ev.get("place") or ev.get("address") or "オンライン/未定",
-        "url":      ev.get("event_url","#"),
-        "source":   "connpass",
-        "accepted": ev.get("accepted", 0),
-        "limit":    ev.get("limit", 0),
-        "sort_key": sort_key,
-    }
-
-
-# ──────────────────────────────────────────────────────
 # 全ソース集約
 # ──────────────────────────────────────────────────────
 
@@ -279,12 +233,6 @@ def fetch_all_events() -> tuple:
             if ev["url"] not in seen_urls:
                 seen_urls.add(ev["url"])
                 all_events.append(ev)
-
-    # connpass
-    print("connpassからイベントを取得中...")
-    for kw in CONNPASS_KEYWORDS:
-        print(f"  キーワード: {kw}")
-        add([parse_connpass_event(e) for e in fetch_connpass_events(kw, CONNPASS_COUNT)])
 
     # AI解析サイト
     for target in AI_SCRAPE_TARGETS:
@@ -305,7 +253,6 @@ def fetch_all_events() -> tuple:
 # ──────────────────────────────────────────────────────
 
 SOURCE_STYLES = {
-    "connpass":    ("#dbeafe", "#1d4ed8", "connpass"),
     "エンドウ練習会": ("#fef9c3", "#854d0e", "エンドウ"),
     "LUMINA":      ("#fce7f3", "#9d174d", "LUMINA"),
 }
@@ -394,7 +341,7 @@ def generate_html(upcoming: list, past: list) -> str:
 <body>
 <header>
   <h1>🏊 🚴 🏃 トライアスロン練習会</h1>
-  <p>connpass / サイクルショップエンドウ / Triathlon LUMINA から自動取得（AI解析）</p>
+  <p>サイクルショップエンドウ / Triathlon LUMINA から自動取得（AI解析）</p>
   <div class="stats">
     <span class="stat-chip">今後の予定: {len(upcoming)}件</span>
     <span class="stat-chip">更新: {now_str}</span>
@@ -409,7 +356,6 @@ def generate_html(upcoming: list, past: list) -> str:
 <footer>
   <p>
     データソース:
-    <a href="https://connpass.com" target="_blank" rel="noopener" style="color:var(--primary)">connpass</a> /
     <a href="https://cycleshopendo.com/shop/post-25594.html" target="_blank" rel="noopener" style="color:var(--primary)">サイクルショップエンドウ</a> /
     <a href="https://triathlon-lumina.com/category/item/entry/" target="_blank" rel="noopener" style="color:var(--primary)">Triathlon LUMINA</a>
   </p>
