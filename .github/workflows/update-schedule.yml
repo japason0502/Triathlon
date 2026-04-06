@@ -13,11 +13,13 @@ permissions:
   pages: write
   id-token: write
 
+# checkout / setup-python など JS Action を Node 24 で実行（runner 既定の Node 20 廃止前の先行対応）
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   update-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
       - name: リポジトリをチェックアウト
