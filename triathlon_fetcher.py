@@ -102,6 +102,51 @@ def _make_sort_key(date_str: str, time_str: str) -> str:
         return date_str  # フォールバック
 
 
+def _strip_json_fence(raw: str) -> str:
+    """モデルが ```json で囲んだ場合も中身だけ取り出す"""
+    s = raw.strip()
+    s = re.sub(r"^```(?:json)?\s*\n?", "", s, flags=re.IGNORECASE)
+    s = re.sub(r"\n?```\s*$", "", s)
+    return s.strip()
+
+
+def _parse_ai_json_array(raw: str, source_name: str) -> list:
+    """
+    Claude の応答を JSON 配列にする。
+    途中切れ・不正エスケープ時は 1 回だけ修復リクエストを試す。
+    """
+    cleaned = _strip_json_fence(raw)
+    try:
+        data = json.loads(cleaned)
+        return data if isinstance(data, list) else []
+    except json.JSONDecodeError as e:
+        print(f"[WARNING] AI JSON パース失敗 ({source_name}): {e}", file=sys.stderr)
+
+    try:
+        client = _get_ai_client()
+        fix = client.messages.create(
+            model=AI_MODEL,
+            max_tokens=8192,
+            messages=[
+                {
+                    "role": "user",
+                    "content": (
+                        "次のテキストはイベント情報のJSON配列だが構文エラーがある。"
+                        "内容をできるだけ保ったまま、有効なJSON配列だけを出力してください。"
+                        "説明文・コードフェンスは禁止。配列以外は出力しない。\n\n"
+                        + cleaned[:16000]
+                    ),
+                }
+            ],
+        )
+        fixed = _strip_json_fence(fix.content[0].text)
+        data = json.loads(fixed)
+        return data if isinstance(data, list) else []
+    except Exception as e2:
+        print(f"[WARNING] AI解析エラー ({source_name}): {e2}", file=sys.stderr)
+        return []
+
+
 # ──────────────────────────────────────────────────────
 # AI解析エンジン
 # ──────────────────────────────────────────────────────
@@ -151,23 +196,22 @@ JSON配列として返してください。
 - 記事一覧ページの場合は各記事を1件として扱う
 - イベントが見つからない場合は [] を返す
 - JSONのみ返す（説明文・コードブロック記号は不要）
+- 文字列値にダブルクォート " を含める場合は必ず \\" でエスケープする（タイトルは句読点に置き換えてもよい）
+- 応答は必ず1つのJSON配列で完結させる（途中で切らない）
 
 【ページテキスト】
-{page_text[:10000]}
+{page_text[:12000]}
 """
 
     try:
         client = _get_ai_client()
         msg = client.messages.create(
             model=AI_MODEL,
-            max_tokens=2048,
+            max_tokens=8192,
             messages=[{"role": "user", "content": prompt}],
         )
         raw = msg.content[0].text.strip()
-        # コードブロックが含まれていても対応
-        raw = re.sub(r"^```[a-z]*\n?", "", raw)
-        raw = re.sub(r"\n?```$", "", raw)
-        items = json.loads(raw)
+        items = _parse_ai_json_array(raw, source_name)
     except Exception as e:
         print(f"[WARNING] AI解析エラー ({source_name}): {e}", file=sys.stderr)
         return []
