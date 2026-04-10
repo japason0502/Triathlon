@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Triathlon ブログ開設のごあいさつ" />
+    <title>このサイトのブログをはじめます | Triathlon</title>
+    <link rel="stylesheet" href="../../assets/css/blog.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>🏊🚴🏃 Triathlon ブログ</h1>
+      <p>練習の記録・イベントメモ・リンク集</p>
+      <nav class="site-nav" aria-label="サイト内">
+        <a href="../../index.html">ホーム</a>
+        <a href="../../schedule.html">スケジュール</a>
+        <a href="../index.html">ブログ</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumb" aria-label="パンくず">
+        <a href="../../index.html">ホーム</a> › <a href="../index.html">ブログ</a> › 記事
+      </nav>
+      <article class="post">
+        <header class="post-header">
+          <time datetime="2026-04-11">2026年4月11日</time>
+          <h1>このサイトのブログをはじめます</h1>
+          <div class="post-tags"><span class="tag">お知らせ</span><span class="tag">サイト</span></div>
+        </header>
+        <div class="post-body">
+          <p>
+            トップページの<strong>練習会スケジュール</strong>はこれまでどおり自動更新です。このブログでは、参加したイベントの感想、ギアのメモ、次に行くときの備忘録などを書いていく想定です。
+          </p>
+          <h2>記事の追加のしかた</h2>
+          <ul>
+            <li><code>blog/posts/</code> に新しい <code>.html</code> を置く（ファイル名は <code>YYYY-MM-DD-スラッグ.html</code> がわかりやすいです）</li>
+            <li><code>blog/index.html</code> の記事一覧に、同じく1件分の <code>&lt;a class="post-card"&gt;</code> を追加する</li>
+          </ul>
+          <p>まずはこのテンプレートをコピーしてタイトルと本文を差し替えると早いです。</p>
+        </div>
+        <footer class="post-footer">
+          <a href="../index.html">← 記事一覧へ</a>
+        </footer>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <p><a href="../../index.html">← ホームへ</a> · <a href="../../schedule.html">スケジュール</a></p>
+    </footer>
+  </body>
+</html>

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 トライアスロン練習会スケジュール取得 & HTML生成スクリプト
-GitHub Actions で定期実行し、index.html を自動更新します。
+GitHub Actions で定期実行し、schedule.html（練習会スケジュール）を自動更新します。
 
 対応ソース:
   - サイクルショップエンドウ (AI解析)
@@ -35,7 +35,7 @@ except ImportError:
 # ═══════════════════════════════════════════════════════
 # 設定
 # ═══════════════════════════════════════════════════════
-OUTPUT_FILE       = "index.html"
+OUTPUT_FILE       = "schedule.html"
 AI_MODEL          = "claude-haiku-4-5-20251001"   # 安くて速い
 
 JST = datetime.timezone(datetime.timedelta(hours=9))
@@ -378,6 +378,10 @@ def generate_html(upcoming: list, past: list) -> str:
   .capacity-text{{font-size:.75rem;color:var(--text-muted);white-space:nowrap}}
   .past-section{{opacity:.7}}
   .empty{{color:var(--text-muted);text-align:center;padding:2rem;font-size:.95rem}}
+  .site-nav{{display:flex;justify-content:center;gap:.5rem 1rem;flex-wrap:wrap;margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.25)}}
+  .site-nav a{{color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;padding:.35rem .85rem;border-radius:999px;background:rgba(255,255,255,.2)}}
+  .site-nav a[aria-current="page"]{{background:rgba(255,255,255,.35)}}
+  .site-nav a:hover{{text-decoration:underline}}
   footer{{text-align:center;padding:2rem;font-size:.8rem;color:var(--text-muted);border-top:1px solid var(--border);margin-top:3rem}}
   @media(max-width:480px){{header h1{{font-size:1.4rem}}.cards-grid{{grid-template-columns:1fr}}}}
 </style>
@@ -390,6 +394,11 @@ def generate_html(upcoming: list, past: list) -> str:
     <span class="stat-chip">今後の予定: {len(upcoming)}件</span>
     <span class="stat-chip">更新: {now_str}</span>
   </div>
+  <nav class="site-nav" aria-label="サイト内">
+    <a href="index.html">ホーム</a>
+    <a href="schedule.html" aria-current="page">スケジュール</a>
+    <a href="blog/">ブログ</a>
+  </nav>
 </header>
 <main>
   <h2 class="section-title">📅 今後の練習会・イベント</h2>
@@ -403,7 +412,7 @@ def generate_html(upcoming: list, past: list) -> str:
     <a href="https://cycleshopendo.com/shop/post-25594.html" target="_blank" rel="noopener" style="color:var(--primary)">サイクルショップエンドウ</a> /
     <a href="https://triathlon-lumina.com/category/item/entry/" target="_blank" rel="noopener" style="color:var(--primary)">Triathlon LUMINA</a>
   </p>
-  <p style="margin-top:.3rem">GitHub Actions により毎日自動更新（Claude AI解析）</p>
+  <p style="margin-top:.3rem"><a href="blog/" style="color:var(--primary)">ブログ</a> · GitHub Actions により毎日自動更新（Claude AI解析）</p>
 </footer>
 </body>
 </html>"""

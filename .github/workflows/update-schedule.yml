@@ -43,7 +43,10 @@ jobs:
         run: python triathlon_fetcher.py
 
       - name: 公開用ディレクトリを用意
-        run: mkdir -p _site && cp index.html _site/
+        run: |
+          mkdir -p _site
+          cp index.html schedule.html _site/
+          cp -r blog assets _site/
 
       - name: Pages 用に設定
         uses: actions/configure-pages@v5
