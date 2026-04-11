@@ -4,93 +4,404 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="湘南エリアのトライアスロン練習会スケジュールとブログ" />
-    <title>🏊🚴🏃 Triathlon | ホーム</title>
+    <title>Triathlon | ホーム</title>
     <link rel="stylesheet" href="assets/css/blog.css" />
     <style>
-      .landing-lead {
+      /* ===== HERO ===== */
+      .hero {
+        position: relative;
+        height: 100svh;
+        min-height: 480px;
+        max-height: 800px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 65% 55%;
+        filter: brightness(0.72);
+      }
+      .hero-overlay {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        padding: 3rem 2rem 2.5rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0) 100%);
+      }
+      .hero-eyebrow {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.7);
+        margin-bottom: 0.5rem;
+      }
+      .hero-title {
+        font-size: clamp(2.4rem, 7vw, 4.5rem);
+        font-weight: 900;
+        color: #fff;
+        letter-spacing: 0.04em;
+        line-height: 1.1;
+        margin-bottom: 0.6rem;
+      }
+      .hero-sub {
         font-size: 1rem;
-        color: var(--muted);
-        max-width: 36rem;
-        margin-bottom: 2rem;
-        line-height: 1.75;
+        color: rgba(255,255,255,0.82);
+        margin-bottom: 1.75rem;
+        line-height: 1.6;
       }
-      .landing-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 1rem;
+      .hero-btns {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
       }
-      .landing-card {
-        display: block;
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 1.35rem 1.25rem;
-        box-shadow: var(--shadow);
+      .hero-btn {
+        display: inline-block;
+        padding: 0.7rem 1.5rem;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        font-weight: 700;
         text-decoration: none;
-        color: inherit;
         transition: transform 0.15s, box-shadow 0.15s;
       }
-      .landing-card:hover {
+      .hero-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-        border-color: var(--primary);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
       }
-      .landing-card h2 {
-        font-size: 1.1rem;
+      .hero-btn-primary {
+        background: #0ea5e9;
+        color: #fff;
+      }
+      .hero-btn-ghost {
+        background: rgba(255,255,255,0.18);
+        color: #fff;
+        backdrop-filter: blur(4px);
+      }
+
+      /* ===== SITE NAV (floating) ===== */
+      .site-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        background: transparent;
+        box-shadow: none;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .site-header-brand {
+        font-size: 1rem;
         font-weight: 800;
+        color: #fff;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+      }
+      .site-nav {
+        display: flex;
+        gap: 0.25rem;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+      }
+      .site-nav a {
+        background: rgba(255,255,255,0.15);
+        backdrop-filter: blur(4px);
+      }
+      .site-nav a[aria-current="page"] {
+        background: rgba(255,255,255,0.3);
+      }
+
+      /* ===== DISCIPLINE STRIP ===== */
+      .disciplines {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+      }
+      .discipline {
+        position: relative;
+        height: 280px;
+        overflow: hidden;
+      }
+      .discipline img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+        display: block;
+      }
+      .discipline:hover img {
+        transform: scale(1.05);
+      }
+      .discipline-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1.5rem 1rem 1rem;
+        background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .discipline-label span {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        opacity: 0.8;
+        margin-bottom: 0.2rem;
+      }
+
+      /* ===== MAIN CONTENT ===== */
+      .page-wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 2.5rem 1rem 4rem;
+      }
+      .section-title {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
         color: var(--primary-dark);
         margin-bottom: 0.5rem;
       }
-      .landing-card p {
-        font-size: 0.9rem;
+      .about-text {
+        font-size: 0.95rem;
         color: var(--muted);
-        line-height: 1.55;
+        line-height: 1.8;
+        max-width: 38rem;
+        margin-bottom: 2.5rem;
+        border-left: 3px solid var(--primary);
+        padding-left: 1rem;
       }
-      .landing-card .go {
-        margin-top: 0.75rem;
+
+      /* ===== CARDS ===== */
+      .landing-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-bottom: 3rem;
+      }
+      .landing-card {
+        display: flex;
+        flex-direction: column;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 0;
+        box-shadow: var(--shadow);
+        text-decoration: none;
+        color: inherit;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .landing-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+        border-color: var(--primary);
+      }
+      .card-accent {
+        height: 5px;
+      }
+      .card-accent-blue { background: linear-gradient(90deg, #0284c7, #38bdf8); }
+      .card-accent-teal { background: linear-gradient(90deg, #0d9488, #2dd4bf); }
+      .card-body {
+        padding: 1.35rem 1.25rem 1.5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+      .card-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.6rem;
+        line-height: 1;
+      }
+      .landing-card h2 {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: var(--text);
+        margin-bottom: 0.5rem;
+      }
+      .landing-card p {
+        font-size: 0.88rem;
+        color: var(--muted);
+        line-height: 1.6;
+        flex: 1;
+      }
+      .card-go {
+        margin-top: 1rem;
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--primary-dark);
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      /* ===== BLOG SECTION ===== */
+      .home-blog {
+        border-top: 1px solid var(--border);
+        padding-top: 2rem;
+      }
+      .home-blog-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 1.25rem;
+      }
+      .home-blog-header h2 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--text);
+      }
+      .home-blog .more-link a {
         font-size: 0.85rem;
         font-weight: 700;
         color: var(--primary-dark);
+        text-decoration: none;
+      }
+      .home-blog .more-link a:hover { text-decoration: underline; }
+
+      /* ===== FOOTER ===== */
+      .site-footer {
+        background: #0f172a;
+        color: rgba(255,255,255,0.5);
+        text-align: center;
+        padding: 2rem 1rem;
+        font-size: 0.78rem;
+        border-top: none;
+        margin-top: 0;
+      }
+      .site-footer a {
+        color: rgba(255,255,255,0.65);
+      }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 600px) {
+        .disciplines {
+          grid-template-columns: 1fr;
+        }
+        .discipline {
+          height: 200px;
+        }
+        .hero-overlay {
+          padding: 2rem 1.25rem 2rem;
+        }
+        .site-header {
+          padding: 0.75rem 1rem;
+        }
       }
     </style>
   </head>
   <body>
+
+    <!-- Floating header nav -->
     <header class="site-header">
-      <h1>🏊 🚴 🏃 Triathlon</h1>
-      <p>練習会スケジュールとブログ</p>
+      <a class="site-header-brand" href="index.html">TRIATHLON</a>
       <nav class="site-nav" aria-label="サイト内">
         <a href="index.html" aria-current="page">ホーム</a>
         <a href="schedule.html">スケジュール</a>
         <a href="blog/">ブログ</a>
       </nav>
     </header>
-    <main>
-      <p class="landing-lead">
-        サイクルショップエンドウ・Triathlon LUMINA・横浜市トライアスロン協会などの情報をもとに、練習会の日程を一覧しています。メモやレポートはブログへ。
-      </p>
-      <div class="landing-cards">
-        <a class="landing-card" href="schedule.html">
-          <h2>📅 練習会スケジュール</h2>
-          <p>今後の練習会・イベントと直近の過去分。自動更新です。</p>
-          <span class="go">見る →</span>
-        </a>
-        <a class="landing-card" href="blog/">
-          <h2>📝 ブログ</h2>
-          <p>参加記録、ギアのメモ、チェックリストなど。</p>
-          <span class="go">見る →</span>
-        </a>
+
+    <!-- Hero -->
+    <section class="hero">
+      <img
+        class="hero-bg"
+        src="assets/img/hero.jpg"
+        alt="九十九里トライアスロン フィニッシュ"
+        fetchpriority="high"
+        decoding="async"
+        width="1600"
+        height="1067"
+      />
+      <div class="hero-overlay">
+        <p class="hero-eyebrow">湘南エリア</p>
+        <h1 class="hero-title">Triathlon</h1>
+        <p class="hero-sub">練習会スケジュール &amp; レース記録</p>
+        <div class="hero-btns">
+          <a class="hero-btn hero-btn-primary" href="schedule.html">練習会スケジュール</a>
+          <a class="hero-btn hero-btn-ghost" href="blog/">ブログを読む</a>
+        </div>
       </div>
-      <section class="home-blog" aria-labelledby="home-blog-heading">
-        <h2 id="home-blog-heading">最近のブログ</h2>
-        <div id="home-blog-list" class="post-list"></div>
-        <p class="more-link"><a href="blog/">すべての記事 →</a></p>
-      </section>
+    </section>
+
+    <!-- 3 Disciplines -->
+    <div class="disciplines" aria-hidden="true">
+      <div class="discipline">
+        <img src="assets/img/swim.jpg" alt="スイム" loading="lazy" width="600" height="400" />
+        <div class="discipline-label"><span>01</span>スイム</div>
+      </div>
+      <div class="discipline">
+        <img src="assets/img/bike.jpg" alt="バイク" loading="lazy" width="600" height="400" style="object-position: center 40%;" />
+        <div class="discipline-label"><span>02</span>バイク</div>
+      </div>
+      <div class="discipline">
+        <img src="assets/img/run.jpg" alt="ラン" loading="lazy" width="600" height="400" />
+        <div class="discipline-label"><span>03</span>ラン</div>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <main>
+      <div class="page-wrap">
+
+        <p class="section-title">About</p>
+        <p class="about-text">
+          サイクルショップエンドウ・Triathlon LUMINA・横浜市トライアスロン協会などの情報をもとに、練習会の日程を一覧しています。メモやレポートはブログへ。
+        </p>
+
+        <p class="section-title">Contents</p>
+        <div class="landing-cards">
+          <a class="landing-card" href="schedule.html">
+            <div class="card-accent card-accent-blue"></div>
+            <div class="card-body">
+              <div class="card-icon">📅</div>
+              <h2>練習会スケジュール</h2>
+              <p>今後の練習会・イベントと直近の過去分。自動更新です。</p>
+              <span class="card-go">見る →</span>
+            </div>
+          </a>
+          <a class="landing-card" href="blog/">
+            <div class="card-accent card-accent-teal"></div>
+            <div class="card-body">
+              <div class="card-icon">📝</div>
+              <h2>ブログ</h2>
+              <p>参加記録、ギアのメモ、チェックリストなど。</p>
+              <span class="card-go">見る →</span>
+            </div>
+          </a>
+        </div>
+
+        <section class="home-blog" aria-labelledby="home-blog-heading">
+          <div class="home-blog-header">
+            <h2 id="home-blog-heading">最近のブログ</h2>
+            <p class="more-link"><a href="blog/">すべての記事 →</a></p>
+          </div>
+          <div id="home-blog-list" class="post-list"></div>
+        </section>
+
+      </div>
     </main>
+
     <footer class="site-footer">
       <p>
-        <a href="https://github.com/japason0502/Triathlon" style="color: var(--primary-dark)">GitHub</a>
+        <a href="https://github.com/japason0502/Triathlon">GitHub</a>
       </p>
     </footer>
+
     <script src="assets/js/blog-list.js"></script>
     <script>
       renderBlogList("#home-blog-list", { manifestUrl: "blog/posts.json", linkPrefix: "blog/" });
