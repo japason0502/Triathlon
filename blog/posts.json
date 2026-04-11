@@ -1,0 +1,18 @@
+{
+  "posts": [
+    {
+      "slug": "2026-04-11-blog-start",
+      "path": "posts/2026-04-11-blog-start.html",
+      "date": "2026-04-11",
+      "title": "このサイトのブログをはじめます",
+      "description": "Triathlon ブログ開設のごあいさつ"
+    },
+    {
+      "slug": "2026-04-01-ows-checklist",
+      "path": "posts/2026-04-01-ows-checklist.html",
+      "date": "2026-04-01",
+      "title": "OWSに行く前のチェックリスト（例）",
+      "description": "オープンウォータースイム前のチェックリスト例"
+    }
+  ]
+}

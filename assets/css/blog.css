@@ -199,6 +199,25 @@ article.post {
 .post-footer a {
   font-weight: 600;
 }
+.home-blog {
+  margin-top: 2.5rem;
+}
+.home-blog h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+.home-blog .more-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.blog-list-error,
+.blog-list-empty {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
 .site-footer {
   text-align: center;
   padding: 2rem 1rem;

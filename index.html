@@ -80,11 +80,20 @@
           <span class="go">見る →</span>
         </a>
       </div>
+      <section class="home-blog" aria-labelledby="home-blog-heading">
+        <h2 id="home-blog-heading">最近のブログ</h2>
+        <div id="home-blog-list" class="post-list"></div>
+        <p class="more-link"><a href="blog/">すべての記事 →</a></p>
+      </section>
     </main>
     <footer class="site-footer">
       <p>
         <a href="https://github.com/japason0502/Triathlon" style="color: var(--primary-dark)">GitHub</a>
       </p>
     </footer>
+    <script src="assets/js/blog-list.js"></script>
+    <script>
+      renderBlogList("#home-blog-list", { manifestUrl: "blog/posts.json", linkPrefix: "blog/" });
+    </script>
   </body>
 </html>

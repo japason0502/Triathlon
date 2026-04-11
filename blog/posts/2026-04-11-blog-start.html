@@ -34,7 +34,7 @@
           <h2>記事の追加のしかた</h2>
           <ul>
             <li><code>blog/posts/</code> に新しい <code>.html</code> を置く（ファイル名は <code>YYYY-MM-DD-スラッグ.html</code> がわかりやすいです）</li>
-            <li><code>blog/index.html</code> の記事一覧に、同じく1件分の <code>&lt;a class="post-card"&gt;</code> を追加する</li>
+            <li>ルートで <code>python build_blog_manifest.py</code> を実行し、<code>blog/posts.json</code> を更新する（トップ・ブログ一覧に反映されます）</li>
           </ul>
           <p>まずはこのテンプレートをコピーしてタイトルと本文を差し替えると早いです。</p>
         </div>

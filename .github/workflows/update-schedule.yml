@@ -42,6 +42,9 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python triathlon_fetcher.py
 
+      - name: ブログ記事一覧（posts.json）を生成
+        run: python build_blog_manifest.py
+
       - name: 公開用ディレクトリを用意
         run: |
           mkdir -p _site
