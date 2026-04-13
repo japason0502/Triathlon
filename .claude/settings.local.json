@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(jpg|JPG|jpeg|JPEG|png|PNG\\)$\")",
+      "Bash(grep -E \"\\\\.\\(jpg|JPG|jpeg|JPEG|png|PNG|heic|HEIC\\)$\")",
+      "Bash(cp \"C:/Users/stana/Dropbox/Project/private/トライアスロン/九十九里/50_m-FPIX-7-01174503-DIGITAL_HIGHRES-7164_038904-35007056.JPG\" \"C:/git/Triathlon/assets/img/hero.jpg\")",
+      "Bash(cp \"C:/Users/stana/Dropbox/Project/private/トライアスロン/tateyama-.jpg\" \"C:/git/Triathlon/assets/img/swim.jpg\")",
+      "Bash(cp \"C:/Users/stana/Dropbox/Project/private/トライアスロン/LAKEBIWA/2_m-FPIX-7-01173172-DIGITAL_HIGHRES-6997_000432-34862102.JPG\" \"C:/git/Triathlon/assets/img/bike.jpg\")",
+      "Bash(cp \"C:/Users/stana/Dropbox/Project/private/トライアスロン/LAKEBIWA/17_m-FPIX-7-01173172-DIGITAL_HIGHRES-6997_006314-34862117.JPG\" \"C:/git/Triathlon/assets/img/run.jpg\")",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
