@@ -2,14 +2,17 @@
 """
 Scan blog/posts/*.html and blog/posts/*.md and write blog/posts.json (newest date first).
 If .md exists, generate a matching .html on build.
+Also writes sitemap.xml at the repo root so Google can crawl new posts.
 Run after adding or editing a post, and in CI before deploy.
 """
 
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
+from datetime import date
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -18,6 +21,12 @@ from markdown import Markdown
 ROOT = Path(__file__).resolve().parent
 POSTS_DIR = ROOT / "blog" / "posts"
 OUT = ROOT / "blog" / "posts.json"
+SITEMAP_OUT = ROOT / "sitemap.xml"
+
+# Override via env var in CI if you switch to a custom domain.
+SITE_BASE_URL = os.environ.get(
+    "SITE_BASE_URL", "https://japason0502.github.io/Triathlon/"
+).rstrip("/") + "/"
 
 MD_FRONT_MATTER_RE = re.compile(r"\A---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 
@@ -51,12 +60,13 @@ def _parse_front_matter(md_text: str) -> tuple[dict[str, str], str]:
     return meta, body
 
 
-def _md_to_post_html(*, title: str, date: str, description: str, tags: list[str], body_html: str) -> str:
+def _md_to_post_html(*, slug: str, title: str, date: str, description: str, tags: list[str], body_html: str) -> str:
     tags_html = "".join(f'<span class="tag">{_escape_html(t)}</span>' for t in tags if t)
     tags_block = f'<div class="post-tags">{tags_html}</div>' if tags_html else ""
     desc_meta = _escape_html(description)
     title_meta = _escape_html(title)
     date_meta = _escape_html(date)
+    canonical = _escape_html(f"{SITE_BASE_URL}blog/posts/{slug}.html")
 
     return (
         "<!DOCTYPE html>\n"
@@ -65,9 +75,15 @@ def _md_to_post_html(*, title: str, date: str, description: str, tags: list[str]
         '    <meta charset="UTF-8" />\n'
         '    <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n'
         f'    <meta name="description" content="{desc_meta}" />\n'
+        f'    <link rel="canonical" href="{canonical}" />\n'
+        f'    <meta property="og:type" content="article" />\n'
+        f'    <meta property="og:title" content="{title_meta}" />\n'
+        f'    <meta property="og:description" content="{desc_meta}" />\n'
+        f'    <meta property="og:url" content="{canonical}" />\n'
         f"    <title>{title_meta} | Triathlon</title>\n"
         '    <link rel="stylesheet" href="../../assets/css/base.css" />\n'
         '    <link rel="stylesheet" href="../../assets/css/blog.css" />\n'
+        '    <script src="../../assets/js/analytics.js"></script>\n'
         "  </head>\n"
         "  <body>\n"
         '    <header class="site-header">\n'
@@ -138,6 +154,7 @@ def build_md_post(md_path: Path) -> Path | None:
     out_path = md_path.with_suffix(".html")
     out_path.write_text(
         _md_to_post_html(
+            slug=md_path.stem,
             title=title,
             date=date_str,
             description=description,
@@ -183,6 +200,32 @@ def parse_post(path: Path) -> dict | None:
     }
 
 
+def write_sitemap(posts: list[dict]) -> None:
+    """
+    Emit sitemap.xml at repo root. Google reads <lastmod> to detect updates.
+    """
+    today = date.today().isoformat()
+    newest_post = posts[0]["date"] if posts else today
+
+    urls: list[tuple[str, str]] = [
+        (SITE_BASE_URL, newest_post),
+        (f"{SITE_BASE_URL}schedule.html", today),
+    ]
+    for p in posts:
+        urls.append((f"{SITE_BASE_URL}blog/posts/{p['slug']}.html", p["date"]))
+
+    lines = ['<?xml version="1.0" encoding="UTF-8"?>',
+             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for loc, lastmod in urls:
+        lines.append("  <url>")
+        lines.append(f"    <loc>{_escape_html(loc)}</loc>")
+        lines.append(f"    <lastmod>{_escape_html(lastmod)}</lastmod>")
+        lines.append("  </url>")
+    lines.append("</urlset>")
+    SITEMAP_OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"wrote {SITEMAP_OUT} ({len(urls)} URLs)")
+
+
 def main() -> int:
     if not POSTS_DIR.is_dir():
         print(f"not found: {POSTS_DIR}", file=sys.stderr)
@@ -220,6 +263,8 @@ def main() -> int:
         encoding="utf-8",
     )
     print(f"wrote {OUT} ({len(posts)} posts)")
+
+    write_sitemap(posts)
     return 0
 
 
