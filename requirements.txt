@@ -1,2 +1,3 @@
 beautifulsoup4>=4.12
 anthropic>=0.30
+Markdown>=3.7
