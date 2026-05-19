@@ -85,6 +85,7 @@ def _md_to_post_html(*, slug: str, title: str, date: str, description: str, tags
         '    <link rel="stylesheet" href="../../assets/css/blog.css" />\n'
         '    <script src="../../assets/js/analytics.js"></script>\n'
         '    <script src="../../assets/js/toc.js" defer></script>\n'
+        '    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>\n'
         "  </head>\n"
         "  <body>\n"
         '    <header class="site-header">\n'

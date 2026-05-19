@@ -219,11 +219,11 @@ tags: レース, 完走記, 横浜トライアスロン, WTCS, スタンダー�
 
 仲間のツイートから：
 
-> "横浜トライアスロンおつかれさまでした！暑い中のレースでしたが、みなさんにとって素晴らしいレースになったこと祈っています。" ─ [3HAWK 🐴 / @Triathlon_3HAWK](https://x.com/Triathlon_3HAWK)
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">横浜トライアスロンおつかれさまでした！暑い中のレースでしたが、みなさんにとって素晴らしいレースになったこと祈っています。</p>&mdash; 3HAWK 🐴 (@Triathlon_3HAWK) <a href="https://twitter.com/Triathlon_3HAWK/status/2055915785420493003">2026年5月17日</a></blockquote>
 
 そう、**暑かった**。これは多くの選手が共通して言及していた点。ふくらはぎの心配が先行して暑さの記憶が薄かったけど、振り返ってみると確かに気温は高かったです。
 
-> "Great weather, great race! Very happy to complete @worldtriathlon #Yokohama with my fellow triathletes." ─ [Jean-Eric Paquet 駐日EU大使](https://x.com/EUAmbJapan)
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Great weather, great race! Very happy to complete <a href="https://twitter.com/worldtriathlon">@worldtriathlon</a> #Yokohama with my fellow triathletes.</p>&mdash; Jean-Eric Paquet 駐日EU大使 (@EUAmbJapan) <a href="https://twitter.com/EUAmbJapan/status/2055911651971617163">2026年5月17日</a></blockquote>
 
 外交官も完走しているスケールの大会、という横浜の凄み。
 

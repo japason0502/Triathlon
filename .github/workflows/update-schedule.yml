@@ -63,6 +63,7 @@ jobs:
         run: |
           mkdir -p _site
           cp index.html schedule.html robots.txt sitemap.xml _site/
+          cp googled35473d55a1e6a35.html _site/
           cp -r blog assets _site/
 
       - name: Pages 用に設定
