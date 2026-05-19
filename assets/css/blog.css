@@ -113,6 +113,82 @@ article.post {
   color: #0369a1;
 }
 
+.post-toc {
+  margin-top: 1.5rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.post-toc summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--primary-dark);
+  font-size: 0.95rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.post-toc summary::-webkit-details-marker {
+  display: none;
+}
+
+.post-toc summary::before {
+  content: "▸";
+  display: inline-block;
+  color: var(--muted);
+  font-size: 0.8rem;
+  transition: transform 0.15s ease;
+}
+
+.post-toc[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.post-toc ul {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.post-toc li {
+  margin: 0.3rem 0;
+  line-height: 1.5;
+}
+
+.post-toc a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.post-toc a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+.post-toc-h2 {
+  font-weight: 600;
+}
+
+.post-toc-h3 {
+  padding-left: 1.1rem;
+  font-size: 0.92em;
+}
+
+.post-toc-h4 {
+  padding-left: 2.2rem;
+  font-size: 0.85em;
+  color: var(--muted);
+}
+
+.post-toc-h4 a {
+  color: var(--muted);
+}
+
 .post-body {
   margin-top: 1.5rem;
   font-size: 0.98rem;
