@@ -356,6 +356,7 @@ def generate_html(upcoming: list, past: list) -> str:
 <meta property="og:description" content="湘南エリアの練習会・イベントスケジュールを毎日自動更新。">
 <meta property="og:url" content="https://japason0502.github.io/Triathlon/schedule.html">
 <title>🏊🚴🏃 トライアスロン練習会スケジュール</title>
+<script src="assets/js/analytics.js"></script>
 <style>
   :root{{--primary:#0ea5e9;--primary-dark:#0284c7;--bg:#f0f9ff;--card-bg:#fff;--text:#1e293b;--text-muted:#64748b;--border:#e2e8f0;--shadow:0 2px 8px rgba(0,0,0,.08)}}
   *{{box-sizing:border-box;margin:0;padding:0}}

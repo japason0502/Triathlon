@@ -83,6 +83,7 @@ def _md_to_post_html(*, slug: str, title: str, date: str, description: str, tags
         f"    <title>{title_meta} | Triathlon</title>\n"
         '    <link rel="stylesheet" href="../../assets/css/base.css" />\n'
         '    <link rel="stylesheet" href="../../assets/css/blog.css" />\n'
+        '    <script src="../../assets/js/analytics.js"></script>\n'
         "  </head>\n"
         "  <body>\n"
         '    <header class="site-header">\n'
