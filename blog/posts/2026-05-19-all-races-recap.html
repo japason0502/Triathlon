@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="タイムだけじゃ見えない上達の中身を、Stravaの心拍・ケイデンス・HRゾーン・パワーで分析。2023年の5戦から2024年のアキレス腱断裂、復帰3戦までの「身体の変化」を一気に整理した節目の記録。" />
+    <title>トライアスロン3年・8レースで身体はどう変わったか ─ 心拍・ケイデンス・ゾーン分布で見る上達の足あと | Triathlon</title>
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../assets/css/blog.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <h1>🏊🚴🏃 Triathlon ブログ</h1>
+      <p>練習の記録・イベントメモ・リンク集</p>
+      <nav class="site-nav" aria-label="サイト内">
+        <a href="../../index.html">ホーム</a>
+        <a href="../../schedule.html">スケジュール</a>
+        <a href="../index.html">ブログ</a>
+      </nav>
+    </header>
+    <main>
+      <nav class="breadcrumb" aria-label="パンくず">
+        <a href="../../index.html">ホーム</a> › <a href="../index.html">ブログ</a> › 記事
+      </nav>
+      <article class="post">
+        <header class="post-header">
+          <time datetime="2026-05-19">2026-05-19</time>
+          <h1>トライアスロン3年・8レースで身体はどう変わったか ─ 心拍・ケイデンス・ゾーン分布で見る上達の足あと</h1>
+          <div class="post-tags"><span class="tag">レース</span><span class="tag">振り返り</span><span class="tag">上達分析</span><span class="tag">心拍</span><span class="tag">ケイデンス</span><span class="tag">HRゾーン</span><span class="tag">パワー</span><span class="tag">アキレス腱断裂</span></div>
+        </header>
+        <div class="post-body">
+<p>2023年5月のデビュー戦から数えて <strong>3年・8レース</strong>。途中で2024年のアキレス腱断裂を挟んでいます。</p>
+<p>タイムでの自己ベスト更新（2026-05-17 横浜WTSで2:45:02）はうれしいんだけど、この記事で見たいのは <strong>タイムじゃなくて中身の変化</strong>。心拍はどうなったか、ペダルケイデンスは整ったか、心拍ゾーンの使い方は上手くなったか。</p>
+<p>主に自分用の節目記録です。読んでくれる人はオマケ、ありがとう。</p>
+<p><img alt="横浜WTS2026 スイムフィニッシュ（友人撮影）" src="../../assets/img/races/2026-05-19_all_races_recap/yokohama_swim_finish.jpeg" /></p>
+<hr />
+<h2>Part 1：戦績の輪郭</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>日付</th>
+<th>レース</th>
+<th>種別</th>
+<th>合計</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2023-05-28</td>
+<td>館山わかしお</td>
+<td>OD</td>
+<td>2:57:32</td>
+</tr>
+<tr>
+<td>2</td>
+<td>2023-06-25</td>
+<td>レイクハマナ</td>
+<td>OD</td>
+<td>2:53:54</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2023-09-10</td>
+<td>Mt.富士</td>
+<td>OD</td>
+<td>3:03:15</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2023-10-01</td>
+<td>LAKE BIWA</td>
+<td>ミドル</td>
+<td>5:06:22</td>
+</tr>
+<tr>
+<td>5</td>
+<td>2023-10-08</td>
+<td>九十九里</td>
+<td>ミドル</td>
+<td>5:55:14</td>
+</tr>
+<tr>
+<td>─</td>
+<td><strong>2024年</strong></td>
+<td><strong>アキレス腱断裂で全休</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td>2025-08-03</td>
+<td>たかはらやま</td>
+<td>山岳OD</td>
+<td>3:15:19</td>
+</tr>
+<tr>
+<td>7</td>
+<td>2025-09-27</td>
+<td>九十九里</td>
+<td>OD</td>
+<td>2:59:59</td>
+</tr>
+<tr>
+<td>8</td>
+<td>2026-05-17</td>
+<td>横浜WTS</td>
+<td>OD</td>
+<td><strong>2:45:02</strong></td>
+</tr>
+</tbody>
+</table>
+<p>ここから先は「タイム」じゃなくて、<strong>Stravaに残ってる心拍・ケイデンス・パワー・ゾーン分布で何が変わったか</strong>を見ていきます。</p>
+<blockquote>
+<p><strong>データの注意点</strong>：2023年9月（富士）〜2025年9月（九十九里OD）までの5レースは、Garminの心拍計測がうまく取れていません（センサー接触不良 or Multisportモードの設定影響）。なので心拍ベースの比較は3レース（<strong>館山・浜名湖・横浜</strong>）に限定されます。これは反省点。<strong>次の大会から心拍は確実に取る</strong>。</p>
+</blockquote>
+<hr />
+<h2>Part 2：🚴 バイクで一番伸びたのは「ケイデンス」だった</h2>
+<p>タイムや速度より明確に上達が見えた指標が <strong>ペダルケイデンス（rpm）</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>日付</th>
+<th>レース</th>
+<th>バイクケイデンス</th>
+<th>前戦比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023-05-28</td>
+<td>館山</td>
+<td><strong>58.0 rpm</strong></td>
+<td>デビュー戦</td>
+</tr>
+<tr>
+<td>2023-06-25</td>
+<td>浜名湖</td>
+<td>74.8 rpm</td>
+<td><strong>+16.8</strong></td>
+</tr>
+<tr>
+<td>2023-09-10</td>
+<td>富士</td>
+<td>78.6 rpm</td>
+<td>+3.8</td>
+</tr>
+<tr>
+<td>2023-10-01</td>
+<td>LAKE BIWA</td>
+<td><strong>84.4 rpm</strong></td>
+<td>+5.8</td>
+</tr>
+<tr>
+<td>2023-10-08</td>
+<td>九十九里M</td>
+<td>82.8 rpm</td>
+<td>-1.6</td>
+</tr>
+<tr>
+<td>2025-08-03</td>
+<td>たかはらやま</td>
+<td>71.3 rpm</td>
+<td>（山岳でケイデンス低下）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>デビュー戦の58rpmから半年で84rpmまで上昇</strong>。これはペダリング理論で言うところの「重いギアをゆっくり踏む（=58rpm、脚に乳酸が溜まりやすい）」から「軽いギアを早く回す（=85〜90rpm目安、心肺主導）」への移行に相当します。</p>
+<p>つまりこの半年で、バイクが <strong>「脚力で押す」から「心肺で回す」に切り替わった</strong>。</p>
+<blockquote>
+<p><strong>バイク経験者向け補足</strong>：エアロロードに乗り換えたとかDHバー導入したわけじゃなく、純粋に <strong>ペダリング技術</strong> が変わった結果のはずです（ギア比は遠出系のミドルでも変わってる可能性あるが、デビュー戦と同じ機材＋同じバイクで2戦目から74.8rpmは技術しか説明できない）。</p>
+</blockquote>
+<p>★加筆お願い：何を意識して変えた？ ローラー台での練習？ ペダリングの本？ それとも自然と？</p>
+<p>ちなみに2025〜2026年はケイデンスセンサーが付いてないバイク構成だったか、Multisportモードのデータ拾い忘れで取れていません。ケイデンスは継続して測っておきたい指標。</p>
+<h3>バイク心拍ゾーン分布の上達</h3>
+<p>3レースだけだけど、これも面白い。<strong>「Z3以上で過ごせた時間の割合」がレース運びの上達度</strong> と言える指標：</p>
+<table>
+<thead>
+<tr>
+<th>レース</th>
+<th>Z1</th>
+<th>Z2</th>
+<th>Z3</th>
+<th>Z4</th>
+<th>Z5</th>
+<th><strong>Z3+合計</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>館山</td>
+<td>35.5%</td>
+<td>35.7%</td>
+<td>28.5%</td>
+<td>0.3%</td>
+<td>0%</td>
+<td><strong>28.8%</strong></td>
+</tr>
+<tr>
+<td>浜名湖</td>
+<td>41.8%</td>
+<td>0.9%</td>
+<td>21.9%</td>
+<td>35.3%</td>
+<td>0%</td>
+<td><strong>57.2%</strong></td>
+</tr>
+<tr>
+<td>横浜</td>
+<td>1.3%</td>
+<td>2.4%</td>
+<td>50.5%</td>
+<td>43.1%</td>
+<td>2.8%</td>
+<td><strong>96.4%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>横浜では全体の96.4%をレース強度（Z3以上）に乗せられている</strong>。これは要するに、コース全体を通じて <strong>「踏める強度で踏み続けた」</strong> ということ。</p>
+<p>館山のZ1=35%、Z2=35%という分布は、「ペースが分からなくて入りで抑えすぎ」「集団に巻かれて出力出せず」「途中で脚を残しすぎ」など、初心者あるあるの分布。それが3年で完全に消えた。</p>
+<p><img alt="横浜 バイク時系列（心拍とペース）" src="../../assets/img/races/2026-05-19_all_races_recap/charts/18536655540_timeseries.png" /></p>
+<h3>心拍と速度の関係（同じ強度で何km/h出せるか）</h3>
+<p>「同じ心拍でどれだけ速いか」が心肺の効率指標。<strong>km/h ÷ bpm × 1000</strong> を見ると：</p>
+<table>
+<thead>
+<tr>
+<th>レース</th>
+<th>バイク速度</th>
+<th>平均HR</th>
+<th>効率指標 (km/h/bpm × 1000)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>館山</td>
+<td>27.5 km/h</td>
+<td>128 bpm</td>
+<td><strong>214.8</strong></td>
+</tr>
+<tr>
+<td>浜名湖</td>
+<td>28.4 km/h</td>
+<td>131 bpm</td>
+<td><strong>216.8</strong></td>
+</tr>
+<tr>
+<td>横浜</td>
+<td>29.6 km/h</td>
+<td>163 bpm</td>
+<td>181.6</td>
+</tr>
+</tbody>
+</table>
+<p><strong>横浜は効率指数が下がってる</strong>ように見えるけど、これは「心肺退化」じゃない。横浜は <strong>心拍をあえて163bpmまで上げにいって速度を取りに行った</strong> という解釈が正しい。レース戦略として <strong>「踏める強度で踏みに行く勇気」</strong>が育ったとも言える。</p>
+<p>館山の128bpm平均は明らかに余裕。これは「初心者の安全運転」だったわけです。</p>
+<hr />
+<h2>Part 3：🏃 ランは「ゾーンの使い方」が変わった ─ 特に横浜のZ5=0%</h2>
+<p>ランHRゾーンの変化。<strong>ここに、復帰後の自分が一番出てる</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>レース</th>
+<th>Z1</th>
+<th>Z2</th>
+<th>Z3</th>
+<th>Z4</th>
+<th>Z5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>館山 (2023-05-28)</td>
+<td>0.6%</td>
+<td>0.6%</td>
+<td>17.0%</td>
+<td>56.6%</td>
+<td><strong>25.2%</strong></td>
+</tr>
+<tr>
+<td>浜名湖 (2023-06-25)</td>
+<td>0%</td>
+<td>0%</td>
+<td>3.6%</td>
+<td>82.6%</td>
+<td>13.8%</td>
+</tr>
+<tr>
+<td>横浜 (2026-05-17)</td>
+<td>0%</td>
+<td>0.1%</td>
+<td>4.0%</td>
+<td><strong>95.9%</strong></td>
+<td><strong>0%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>横浜のZ5=0%</strong>、これがすべて。デビュー戦の館山では25.2%もZ5（最大心拍90%以上のスプリント領域）を使ってた。それが横浜では <strong>意識的にZ5を一度も踏まないペーシング</strong> で10km走り切っている。</p>
+<p>これは2つ意味があると思っていて：</p>
+<ol>
+<li><strong>腱を守る走り</strong> ─ アキレス腱断裂を経験した後、無酸素ゾーンでの全力スプリントは腱への一発負荷が大きい。横浜での Z5=0% は <strong>意識的な選択</strong></li>
+<li><strong>ペーシング技術の成熟</strong> ─ 入りから飛ばさず、Z4の上限近くで一定で押し切る走り方ができるようになった</li>
+</ol>
+<p>ランパワーで見ても面白い：</p>
+<table>
+<thead>
+<tr>
+<th>レース</th>
+<th>平均パワー</th>
+<th>加重平均</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>館山</td>
+<td>258W</td>
+<td>263W</td>
+</tr>
+<tr>
+<td>浜名湖</td>
+<td><strong>272W</strong></td>
+<td>273W</td>
+</tr>
+<tr>
+<td>富士</td>
+<td>261W</td>
+<td>264W</td>
+</tr>
+<tr>
+<td>LAKE BIWA</td>
+<td>250W</td>
+<td>252W</td>
+</tr>
+<tr>
+<td>九十九里M</td>
+<td>257W</td>
+<td>258W</td>
+</tr>
+<tr>
+<td>たかはらやま</td>
+<td>231W</td>
+<td>239W</td>
+</tr>
+<tr>
+<td>横浜</td>
+<td>249W</td>
+<td>253W</td>
+</tr>
+</tbody>
+</table>
+<p>ピークは <strong>浜名湖の272W</strong>。横浜は249Wで、館山より低い。<strong>つまり「より低いパワーで、より速いタイムを出している」</strong> ─ ランニングエコノミー（同じ出力で出せる速度）が向上していると見ていい。</p>
+<p>ペース分布も追跡しがいがある：</p>
+<table>
+<thead>
+<tr>
+<th>レース</th>
+<th>4-5分台</th>
+<th>5-6分台</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>館山</td>
+<td>39.0%</td>
+<td>48.4%</td>
+</tr>
+<tr>
+<td>浜名湖</td>
+<td><strong>55.5%</strong></td>
+<td>40.1%</td>
+</tr>
+<tr>
+<td>横浜</td>
+<td>19.5%</td>
+<td><strong>68.3%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>浜名湖はペース域が4分台中心。横浜は5分台中心。<strong>「速い走り」から「安定した走り」へ</strong> ─ これも腱保護の戦略の現れ。</p>
+<p><img alt="浜名湖 ラン時系列（HR/パワー/ペース）" src="../../assets/img/races/2026-05-19_all_races_recap/charts/18562890014_timeseries.png" /></p>
+<p><img alt="横浜 ラン時系列" src="../../assets/img/races/2026-05-19_all_races_recap/charts/18536655540_timeseries.png" /></p>
+<p>★加筆お願い：横浜のZ5=0%、これは意識してたの？ それとも結果的に？</p>
+<hr />
+<h2>Part 4：🏊 スイムは「ケイデンス上昇＋ピーク抑制」</h2>
+<p>スイムは3レースだけしかケイデンスデータが取れていないけど、興味深い：</p>
+<table>
+<thead>
+<tr>
+<th>レース</th>
+<th>平均ケイデンス</th>
+<th>最大ケイデンス</th>
+<th>平均/最大の差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>館山 (2023-05-28)</td>
+<td>26.0 spm</td>
+<td><strong>112 spm</strong></td>
+<td>平均と最大が極端</td>
+</tr>
+<tr>
+<td>横浜 (2026-05-17)</td>
+<td><strong>31.9 spm</strong></td>
+<td>45 spm</td>
+<td>安定</td>
+</tr>
+</tbody>
+</table>
+<p>館山の最大112 spm は明らかに「焦って手をバタつかせた瞬間」の数値。スイムケイデンスでこのレンジは異常で、初心者が人に蹴られそうになった時の反射的なストロークだと思われます。</p>
+<p>それが横浜では平均31.9 spm（+5.9）まで増えて、<strong>最大が45 spm まで下がっている</strong>。これは：</p>
+<ul>
+<li><strong>平均が上がった</strong> = ストローク頻度が上がった（推進力UP）</li>
+<li><strong>最大が下がった</strong> = パニック的なバタつきが消えた（フォーム安定）</li>
+</ul>
+<p>両方の方向で「整った」ということ。</p>
+<p>スイムGPS蛇行率も見たけど：</p>
+<table>
+<thead>
+<tr>
+<th>レース</th>
+<th>蛇行率 (GPS距離 ÷ 公式距離)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>館山</td>
+<td>1.020</td>
+</tr>
+<tr>
+<td>浜名湖</td>
+<td>1.017</td>
+</tr>
+<tr>
+<td>横浜</td>
+<td>1.030</td>
+</tr>
+</tbody>
+</table>
+<p>ほぼ変化なし＝ <strong>OWSの直進性は最初からそれなりにできていた</strong>。これは多分プールでスクエア（背中で泳ぐ際の直進感覚）を意識して泳いだ経験が効いてる、と勝手に推測。</p>
+<p>★加筆お願い：スイムって何が一番変わった実感？</p>
+<hr />
+<h2>Part 5：2024年、アキレス腱断裂</h2>
+<p>ここを書かないと数字の話が宙に浮く。</p>
+<p>2024年（時期：★加筆お願い）、右アキレス腱を断裂しました。「ブチッ」という音と、その瞬間にランが止まる感覚。詳細は割愛しますが、<strong>ラン中心スポーツであるトライアスロンにとって、一度人生計画を白紙にする出来事</strong> でした。</p>
+<h3>それでもトライアスロンを諦めなかった理由</h3>
+<p>★加筆お願い（家族の反応・諦めなかった理由・復帰モチベ）：</p>
+<ul>
+<li>一番大きかった「諦めなかった理由」</li>
+<li>妻／家族の反応（やめたら？と言われたか、背中を押されたか）</li>
+<li>「もう走れないかも」と思った瞬間、そこから前を向いたきっかけ</li>
+<li>リハビリ中、何で気持ちを保ったか</li>
+</ul>
+<h3>データから見える「賢くなった復帰」</h3>
+<p>数字が物語る復帰戦略があって、これは振り返ってみないと見えなかったこと：</p>
+<ol>
+<li><strong>復帰初戦は山岳OD（たかはらやま）</strong> ─ 「タイムが比較できないコース」を選んでる</li>
+<li><strong>横浜のラン Z5=0%</strong> ─ 全力スプリント領域を意識的に回避</li>
+<li><strong>ランパワーは横浜249W</strong> ─ 浜名湖272Wから23W絞り、その分ランニングエコノミーで稼ぐ走り</li>
+</ol>
+<p>つまり <strong>「無理しない」を選んだ結果、自己ベストが出た</strong>。</p>
+<p>「諦めなかった」だけでなく、<strong>「諦めなかったけど無理もしなかった」</strong>。これは復帰のひとつの教科書になり得る話だと思います。</p>
+<hr />
+<h2>Part 6：横浜2026に見える「成熟」のサイン</h2>
+<p>ここまでの数字をまとめると、横浜のレースは技術的にこんな構造になっている：</p>
+<table>
+<thead>
+<tr>
+<th>観点</th>
+<th>状態</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>バイクケイデンス</td>
+<td>（計測なし、要改善）</td>
+</tr>
+<tr>
+<td>バイクHRゾーン</td>
+<td><strong>Z3+ 96.4%＝レース強度に乗せ続けた</strong></td>
+</tr>
+<tr>
+<td>バイク速度</td>
+<td>29.6 km/h ＝全戦自己ベスト</td>
+</tr>
+<tr>
+<td>ランHRゾーン</td>
+<td><strong>Z5=0%＝腱保護のペーシング戦略</strong></td>
+</tr>
+<tr>
+<td>ランパワー</td>
+<td>249W ＝浜名湖から23W低い</td>
+</tr>
+<tr>
+<td>ランペース</td>
+<td>5-6分台中心の安定走</td>
+</tr>
+<tr>
+<td>スイムケイデンス</td>
+<td>平均上昇＋最大ピーク抑制＝フォーム成熟</td>
+</tr>
+</tbody>
+</table>
+<p><strong>速度を上げに行ったのはバイクだけ</strong>、ランは抑えに行って、結果として <strong>「無理せず自己ベスト」</strong> を成立させた。これがあんたの今の「成熟」の形だと思います。</p>
+<hr />
+<h2>Part 7：次は IRONMAN 南北海道 2026-09-14</h2>
+<p>★加筆お願い：</p>
+<ul>
+<li>申し込んだ理由（なぜ IRONMAN、なぜ南北海道）</li>
+<li>申し込みタイミング（横浜の前？後？怪我中？）</li>
+<li>一番不安なこと</li>
+<li>一番楽しみなこと</li>
+</ul>
+<p>ミドル2戦の経験と、横浜で見えた「無理しない強さ」の組み合わせは、ロング向きの資質に思える。あとはランの腱が180km走った後でも持ってくれるかどうか。</p>
+<hr />
+<h2>まとめ ─ 3年で身体が学んだこと</h2>
+<ol>
+<li><strong>バイクは「踏む」から「回す」に変わった</strong>（58rpm→84rpm）</li>
+<li><strong>HRゾーンの使い方が整った</strong>（Z3+ 28.8% → 96.4%）</li>
+<li><strong>ランは「速さ」より「安定」を選べるようになった</strong>（Z5回避＋パワー絞り）</li>
+<li><strong>スイムは焦りが消えた</strong>（最大ケイデンス112spm → 45spm）</li>
+<li><strong>復帰戦は「比較できないコース」から入るのが正解だった</strong></li>
+</ol>
+<p>タイムで見ると「自己ベスト更新」というシンプルな話だけど、中身は <strong>「身体が学んだ3年の集大成」</strong>。次のIRONMAN 南北海道に向けて、自分の現在地が見えました。</p>
+<hr />
+<h2>関連記事</h2>
+<ul>
+<li><strong><a href="2026-05-17-yokohama-wts-finish.html">WTCS横浜2026 スタンダード完走記</a></strong> ← 直近レースの詳細</li>
+<li><a href="2026-04-01-ows-checklist.html">OWSに行く前のチェックリスト</a></li>
+</ul>
+<p>★加筆お願い：購入したリカバリー機材・シューズ・サプリのAmazonリンクを後日追記</p>
+        </div>
+        <footer class="post-footer">
+          <a href="../index.html">← 記事一覧へ</a>
+        </footer>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <p><a href="../../index.html">← ホームへ</a> · <a href="../../schedule.html">スケジュール</a></p>
+    </footer>
+  </body>
+</html>
