@@ -8,6 +8,20 @@ on:
   # 手動でも実行できる
   workflow_dispatch:
 
+  # 記事追加・SEO 関連の変更で即時デプロイ
+  # （Google が新しい lastmod を見てクロールできるよう sitemap.xml を更新する）
+  push:
+    branches:
+      - main
+    paths:
+      - "blog/posts/**"
+      - "blog/posts.json"
+      - "index.html"
+      - "assets/**"
+      - "build_blog_manifest.py"
+      - "robots.txt"
+      - ".github/workflows/update-schedule.yml"
+
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -48,7 +62,7 @@ jobs:
       - name: 公開用ディレクトリを用意
         run: |
           mkdir -p _site
-          cp index.html schedule.html _site/
+          cp index.html schedule.html robots.txt sitemap.xml _site/
           cp -r blog assets _site/
 
       - name: Pages 用に設定
