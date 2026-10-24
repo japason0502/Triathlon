@@ -1,0 +1,830 @@
+<title>みなみ北海道 遠征ノート</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@600;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#EEF1F2; --surface:#FFFFFF; --sunken:#E3E8EA;
+    --ink:#131E24; --ink-2:#3E5058; --ink-3:#6C7F87;
+    --line:#CBD5D8; --line-soft:#DEE5E7;
+    --sea:#1B6379; --sea-soft:#E0EDF1;
+    --bike:#2C5FA8; --bike-soft:#E2E9F5;
+    --run:#B93F33; --run-soft:#F6E5E2;
+    --night:#8A6A1F; --night-soft:#F2EBD9;
+    --done:#2F7A5B;
+    --shadow:0 1px 0 rgba(19,30,36,.05);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#0E1519; --surface:#161F25; --sunken:#1D272E;
+      --ink:#E6EDEF; --ink-2:#AEBEC4; --ink-3:#7E9099;
+      --line:#2C3A42; --line-soft:#232F36;
+      --sea:#6EC2DA; --sea-soft:#14313A;
+      --bike:#7FA9E8; --bike-soft:#16263D;
+      --run:#E8887B; --run-soft:#331B18;
+      --night:#DDB765; --night-soft:#2C2415;
+      --done:#6FC49E; --shadow:none;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0E1519; --surface:#161F25; --sunken:#1D272E;
+    --ink:#E6EDEF; --ink-2:#AEBEC4; --ink-3:#7E9099;
+    --line:#2C3A42; --line-soft:#232F36;
+    --sea:#6EC2DA; --sea-soft:#14313A;
+    --bike:#7FA9E8; --bike-soft:#16263D;
+    --run:#E8887B; --run-soft:#331B18;
+    --night:#DDB765; --night-soft:#2C2415;
+    --done:#6FC49E; --shadow:none;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+    font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:32px 20px 80px}
+
+  header{border-bottom:2px solid var(--ink);padding-bottom:18px}
+  .kicker{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sea);margin:0 0 10px}
+  h1{font-family:"Zen Old Mincho","Yu Mincho",serif;font-weight:900;font-size:clamp(28px,6vw,44px);line-height:1.2;margin:0 0 12px;text-wrap:balance;letter-spacing:.01em}
+  .lede{margin:0;color:var(--ink-2);max-width:62ch;font-size:14px}
+  .facts{display:flex;flex-wrap:wrap;gap:0 24px;margin-top:16px;font-family:"Roboto Mono",monospace;font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .facts b{color:var(--ink);font-weight:500}
+
+  .tabs{position:sticky;top:0;z-index:30;background:var(--paper);display:flex;gap:0;border-bottom:1px solid var(--line);padding-top:10px}
+  .tabs button{
+    font:inherit;font-size:14px;font-weight:700;background:none;border:none;
+    color:var(--ink-3);padding:10px 20px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px;
+  }
+  .tabs button[aria-selected="true"]{color:var(--sea);border-bottom-color:var(--sea)}
+  .tabs button:hover{color:var(--ink)}
+  .tabs button:focus-visible{outline:2px solid var(--sea);outline-offset:-2px}
+  .tabs .spacer{flex:1}
+  .meter{display:flex;align-items:center;gap:10px;padding:8px 0 8px 12px}
+  .meter .track{width:70px;height:5px;background:var(--sunken);overflow:hidden}
+  .meter .fill{height:100%;width:0;background:var(--done);transition:width .25s ease}
+  .meter .count{font-family:"Roboto Mono",monospace;font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+  @media (max-width:560px){ .meter{display:none} }
+
+  section{margin-top:32px}
+  .tag{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:9px 14px;color:#fff;background:var(--sea)}
+  .tag h2{font-family:"Zen Old Mincho",serif;font-weight:600;font-size:18px;margin:0;letter-spacing:.02em}
+  .tag .when{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.06em;opacity:.88;margin-left:auto}
+  .s-bike .tag{background:var(--bike)}
+  .s-run .tag{background:var(--run)}
+  .s-night .tag{background:var(--night)}
+
+  .panel{background:var(--surface);border:1px solid var(--line-soft);border-top:none;box-shadow:var(--shadow)}
+  .intro{margin:0;padding:12px 14px;color:var(--ink-2);font-size:13.5px;border-bottom:1px solid var(--line-soft);background:var(--sunken)}
+  .s-sea .intro{background:var(--sea-soft)}
+  .s-bike .intro{background:var(--bike-soft)}
+  .s-run .intro{background:var(--run-soft)}
+  .s-night .intro{background:var(--night-soft)}
+
+  ul{list-style:none;margin:0;padding:0}
+  li{border-bottom:1px solid var(--line-soft)}
+  li:last-child{border-bottom:none}
+  label{display:grid;grid-template-columns:22px 1fr;gap:0 12px;align-items:start;padding:9px 14px;cursor:pointer}
+  label:hover{background:var(--sunken)}
+  input[type=checkbox]{appearance:none;-webkit-appearance:none;margin:4px 0 0;width:16px;height:16px;border:1.5px solid var(--ink-3);background:var(--surface);cursor:pointer;display:block}
+  input[type=checkbox]:checked{background:var(--done);border-color:var(--done)}
+  input[type=checkbox]:checked::after{content:"";display:block;width:4px;height:9px;margin:1px 0 0 5px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg)}
+  input[type=checkbox]:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+  .name{font-weight:500}
+  .note{grid-column:2;font-size:12.5px;color:var(--ink-3);line-height:1.6}
+  input:checked ~ .name{color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:1px}
+  .must .name::after{content:"必須";font-family:"Roboto Mono",monospace;font-size:9.5px;letter-spacing:.08em;color:var(--run);border:1px solid var(--run);padding:0 4px;margin-left:8px;vertical-align:2px}
+
+  .warn{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start;margin:14px 0 0;padding:11px 14px;background:var(--sunken);border-left:3px solid var(--run);font-size:13px;color:var(--ink-2)}
+  .warn b{color:var(--ink);font-weight:700}
+  .warn .mk{font-family:"Roboto Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--run);padding-top:3px;white-space:nowrap}
+  .warn.ok{border-left-color:var(--done)}
+  .warn.ok .mk{color:var(--done)}
+
+  .sched{width:100%;border-collapse:collapse;font-size:13.5px}
+  .sched th,.sched td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  .sched th{font-family:"Roboto Mono",monospace;font-weight:500;font-size:11.5px;letter-spacing:.04em;color:var(--ink-3);white-space:nowrap;width:1%;font-variant-numeric:tabular-nums}
+  .sched tr:last-child th,.sched tr:last-child td{border-bottom:none}
+  .sched td b{font-weight:700}
+  .scroller{overflow-x:auto}
+
+  .filterbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:24px;padding:10px 0;border-bottom:1px solid var(--line-soft)}
+  .filterbar .fl{font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--ink-3)}
+  .filterbar button{font:inherit;font-size:12.5px;background:none;border:1px solid var(--line);color:var(--ink-3);padding:4px 12px;cursor:pointer}
+  .filterbar button.on{border-color:var(--sea);color:var(--sea);font-weight:700}
+  .filterbar button:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+  .filterbar .fnote{font-size:12px;color:var(--ink-3);margin-left:auto;font-variant-numeric:tabular-nums}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink-3);font-size:12px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <p class="kicker">IRONMAN Japan South Hokkaido / 2026.09.13</p>
+    <h1>みなみ北海道 遠征ノート</h1>
+    <p class="lede">アスリートインフォメーションガイド ver1.0・選手輸送ガイド Rev3.1 を最新の正とし、レース前ブリーフィングと自分の予約メールを突き合わせて組んだ遠征計画。</p>
+    <div class="facts">
+      <span>SWIM <b>3.8km</b></span>
+      <span>BIKE <b>180km</b></span>
+      <span>RUN <b>42.2km</b></span>
+      <span>START <b>6:30</b></span>
+      <span>制限 <b>17:00:00</b></span>
+    </div>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" id="tab-sched" aria-selected="true" aria-controls="panel-sched">スケジュール</button>
+    <button type="button" role="tab" id="tab-pack" aria-selected="false" aria-controls="panel-pack">持ち物</button>
+    <span class="spacer"></span>
+    <span class="meter"><span class="count" id="count">0 / 0</span><span class="track"><span class="fill" id="fill"></span></span></span>
+  </div>
+
+  <div id="panel-sched" role="tabpanel" aria-labelledby="tab-sched">
+
+    <section class="s-run">
+      <div class="tag"><h2>いま決まっていること／決まっていないこと</h2><span class="when">2026.09.05 時点</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>期限</th><td><b>バイク発送は9/8まで</b>（佐川の申込は9/7まで）。まだ間に合うので、かさばるものは今から箱に入れる</td></tr>
+          <tr><th>済</th><td><b>レース当日のシャトルバス予約</b>（3,000円・往復）</td></tr>
+          <tr><th>済</th><td><b>航空券</b>：往路 9/11 NH553 羽田09:45→函館11:05 ／ 復路 9/14 NH4760 函館16:45→羽田18:10（AIR DO運航のコードシェア）</td></tr>
+          <tr><th>済</th><td><b>宿</b>：東横INN函館駅前大門（函館市松風町5-1 / 0138-24-1045）IN 9/11 15:00 → OUT 9/14 10:00・3泊</td></tr>
+          <tr><th>要確認</th><td><b>9/11の競馬場での受取可能時間</b>。ガイドに記載がない。<b>ヘルメットとシューズが箱の中にある以上、届かなければ出走できない</b>。追跡番号も控えておく</td></tr>
+          <tr><th>済</th><td><b>ボトル3本はバイクに装着済み</b>。組立時にボトルケージのネジ増し締めを忘れずに</td></tr>
+          <tr><th>要確認</th><td><b>宿にバイクを持ち込めるか</b>。東横INN函館駅前大門 <b>0138-24-1045</b>。①組み立て済みのバイクを部屋に入れられるか（<b>輪行袋なしで自走して着く</b>旨を伝える）②不可なら施錠できる駐輪場・バックヤード・荷物保管室があるか ③9/10-11着の大型荷物を預かってもらえるか。<b>「アイアンマン出場者です」と最初に言うと話が早い</b></td></tr>
+          <tr><th>検討中</th><td><b>9/13→9/14 の木古内泊</b>。取れれば9/14が劇的に楽になる。前日バイク回収案とあわせて「バイクをいつ回収するか」で比較</td></tr>
+          <tr><th>期限あり</th><td><b>タクシーでのバイク持ち込み輸送（C案）を使うなら申込は 9/10 13-17時 ／ 9/11 10-17時</b>、函館アリーナのタクシーデスクのみ。定員になり次第終了</td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">最重要</span><div><b>9/11の受付締切17:00に、その日到着で突っ込む日程</b>になっている。函館11:05着 → 競馬場でバイク受取 → 組立 → アリーナで受付、を17:00までに全部。フライト遅延・受取が午後開始・組立てこずり、のどれか一つで出場できなくなる。<b>受取時間の確認だけは今日やること。</b></div></div>
+    </section>
+
+    <section class="s-sea">
+      <div class="tag"><h2>会場の位置関係</h2><span class="when">3か所に散っている</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>受付・説明会</th><td><b>函館アリーナ</b>（函館市湯川町1-32-2／市電「アリーナ前」）― 9/10(木) 13:00-18:00 ／ 9/11(金) 10:00-17:00</td></tr>
+          <tr><th>バイク受取</th><td><b>JRA函館競馬場</b>（市電「競馬場前」）― アリーナまで<b>徒歩12分／バイク5分</b>。伝票宛先は 函館市駒場町12-2</td></tr>
+          <tr><th>T1・スイム</th><td><b>上磯漁港</b>（北斗市飯生）― 函館駅前から自走約11km／シャトル30分</td></tr>
+          <tr><th>T2・表彰</th><td><b>ふるさとの森公園</b>（木古内町）― <b>木古内駅北口から徒歩5分</b></td></tr>
+          <tr><th>フィニッシュ</th><td><b>木古内町役場</b>（木古内駅から徒歩6〜7分）／ストリートギアバッグ返却は<b>木古内小学校</b></td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="s-sea">
+      <div class="tag"><h2>9/11（金）到着 → 受取 → 受付 → 宿</h2><span class="when">受付最終日</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>11:05</th><td><b>函館空港着</b>（NH553）。空港から競馬場・アリーナは車で約10分</td></tr>
+          <tr><th>12:00頃</th><td><b>JRA函館競馬場でバイク受取</b>。本人確認できるものを持参。その場で開梱・組立（屋外作業）</td></tr>
+          <tr><th>組立</th><td><b>DHバーとクイックレバー×2を取り付ける</b>。緩衝材とスペーサーは<b>箱に戻して閉じる</b>／持ち出すのは工具と携帯ポンプだけ</td></tr>
+          <tr><th>13:30</th><td>徒歩12分で<b>函館アリーナ</b>。アスリートチェックイン、レースキット受取。<b>締切17:00</b></td></tr>
+          <tr><th>15:00-16:00</th><td><b>アスリートブリーフィング（日本語2回目）</b>。参加必須</td></tr>
+          <tr><th>16:30</th><td>自走6kmで<b>東横INN函館駅前大門</b>へ。チェックインは15:00から</td></tr>
+          <tr><th>夜</th><td><b>青・赤・ストリートの3バッグをパッキング</b>、ステッカーを貼る、タトゥーを貼る</td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">背中</span><div>箱にウェット・シューズ・ヘルメットが入っているので、<b>ビンディングシューズは履いて、ヘルメットは被って自走する</b>。そうすれば背負うのは防水バッグのウェットとツールバッグ、そして受付でもらう<b>大会バックパック1つ</b>だけ。参加賞のボトルはボトルケージに挿す。</div></div>
+    </section>
+
+    <section class="s-sea">
+      <div class="tag"><h2>9/12（土）準備・預託日</h2><span class="when">シャトルは無料・予約不要</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>08:15</th><td>宿を出発。<b>バイクは自走</b>（シャトルに積載不可）。青バッグ・赤バッグ・ウェット一式を背負う。ヘルメットは被る</td></tr>
+          <tr><th>09:45</th><td><b>T1（上磯漁港）着</b>。約11km・45〜60分</td></tr>
+          <tr><th>10:00</th><td>T1オープン。<b>アンクルバンド受取 → バイク＋青バッグ預託</b>（ヘルメットチェックあり）。預託は17:00まで</td></tr>
+          <tr><th>10:30</th><td>上磯漁港発シャトル → <b>11:00 木古内駅北口着</b></td></tr>
+          <tr><th>11:05</th><td>徒歩5分で<b>T2に赤バッグ預託</b></td></tr>
+          <tr><th>11:20</th><td>木古内発シャトル → <b>11:50 上磯漁港着</b></td></tr>
+          <tr><th>12:00-12:30</th><td><b>T1トランジションツアー</b>（日本語・英語）</td></tr>
+          <tr><th>13:00-14:00</th><td><b>公式試泳</b>（受付13:50締切）。リストバンド・アンクルバンド・支給スイムキャップが必要</td></tr>
+          <tr><th>14:30</th><td>上磯漁港発シャトル → <b>15:00 函館駅着</b>。以降は18:00発が最終</td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">運行</span><div>9/12は<b>函館駅前↔上磯漁港</b>（函館発 09:00-16:00／上磯発 09:30-18:00）と<b>上磯漁港↔木古内駅北口</b>（上磯発 09:30-16:30／木古内発 10:20-17:20）の2路線のみ、30分毎。<b>木古内→函館の直行便はない</b>ので必ず上磯で乗り継ぐ。定員になり次第出発。乗り場は函館駅中央口の9番。</div></div>
+      <div class="warn"><span class="mk">順序</span><div>試泳には<b>アンクルバンドが必要で、それはバイク預託後にしか受け取れない</b>。だからT1が必ず先。赤バッグを先に片付けておくと、試泳と帰路が手ぶらで済む。</div></div>
+    </section>
+
+    <section class="s-run">
+      <div class="tag"><h2>9/13（日）レース当日</h2><span class="when">6:30 ローリングスタート</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>04:00-05:00</th><td><b>函館駅前発の選手専用シャトル</b>（10分毎・予約済み）→ 上磯漁港。混むので早めに並ぶ</td></tr>
+          <tr><th>05:00-06:00</th><td>T1オープン。バイク最終セット、<b>ストリートギアバッグとパーソナルニーズバッグ2つを預託（6:00締切）</b>。空気圧は携帯ポンプで調整するのでポンプ預託はなし</td></tr>
+          <tr><th>06:15</th><td>全アスリートがトランジションを退出</td></tr>
+          <tr><th>06:30</th><td><b>ローリングスタート</b>。申告タイム別ゾーン（〜70分ピンク／71-100分グリーン／101分〜イエロー）</td></tr>
+          <tr><th>18:30</th><td><b>フィニッシュ（目標）</b>。メダル・シャツ・タオル、リカバリーエリアで牛丼と味噌汁とフルーツ</td></tr>
+          <tr><th>その後</th><td><b>木古内小学校でストリートギアバッグを受け取る</b>（16:00-24:00頃）。バイクはT2に置いて翌日回収する</td></tr>
+          <tr><th>20:00頃</th><td>木古内駅北口発シャトル（17:00-24:30・30分毎・所要1時間15分）→ 函館駅前。<b>21:15頃 宿着</b></td></tr>
+          <tr><th>夜</th><td><b>ウェットとウェアを干す</b>。乾かせるのはこの一晩だけ。翌朝の荷物を3つに仕分けておく</td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">日没</span><div>日没は<b>17:50前後</b>。ヘッドランプと反射素材はランギアバッグかパーソナルニーズに必ず入れる。日没後は地元の人がダウンを着るレベルまで冷える。</div></div>
+    </section>
+
+    <section class="s-night">
+      <div class="tag"><h2>9/14（月）撤収 → 帰宅</h2><span class="when">4時間に全部詰まっている</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>07:00</th><td>荷物を<b>3つに仕分け</b>：①木古内へ持っていく（箱に詰めて帰す物＋梱包工具）②函館に残す（帰りの手荷物）③自宅へ発送する（濡れ物）</td></tr>
+          <tr><th>07:45</th><td><b>チェックアウト</b>。②はフロントに預ける。③はフロントのヤマト元払い伝票で発送・精算</td></tr>
+          <tr><th>08:00</th><td>函館駅前発シャトル（08:00-12:00・30分毎）→ <b>09:00 木古内駅北口着</b></td></tr>
+          <tr><th>09:05</th><td><b>木古内駅北口で空箱を受け取る</b>（8:00-12:00）</td></tr>
+          <tr><th>09:20</th><td>徒歩5分の<b>T2でバイク・ギアバッグ・パーソナルニーズを回収</b>（8:00-12:00・本人確認できるもの持参）</td></tr>
+          <tr><th>09:30-10:30</th><td>駅北口で<b>分解・梱包・発送</b>。屋外作業で30〜40分。<b>締切12:00</b></td></tr>
+          <tr><th>10:30-</th><td><b>表彰式・ロールダウン</b>（木古内町中央公民館、9:30-12:00）に合流</td></tr>
+          <tr><th>12:00 or 12:30</th><td>木古内発シャトル（09:30-14:00・30分毎・所要1:15）→ <b>13:15/13:45 函館駅前着</b></td></tr>
+          <tr><th>15:00</th><td>宿で預けた荷物を回収 → 空港連絡バスで<b>函館空港</b>（約20分）</td></tr>
+          <tr><th>16:45</th><td><b>NH4760 函館発</b> → 羽田18:10着</td></tr>
+          <tr><th>9/15〜</th><td>自宅でバイクを受取</td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">修正</span><div>計画メモの「10:00チェックアウト → 10:30移動 → 12:00までにバイク回収」は<b>成立しない</b>。函館発のシャトルは所要1時間なので、10:30発だと木古内着が11:30。そこから回収・分解・梱包・発送を30分で終えるのは不可能。<b>08:00の始発に乗るために、チェックアウトを7:45に前倒しする</b>のが唯一の解。</div></div>
+      <div class="warn ok"><span class="mk">代案</span><div><b>もし9/13→9/14の木古内泊が取れたら</b>、この日は別物になる。朝にT2まで歩いてバイクを回収、駅北口で梱包・発送、表彰式にゆっくり出て、昼のシャトルで函館へ。<b>前日（9/12）にT2へ行くとき、宿泊用の荷物を先に木古内へ置いてしまえる</b>のも大きい。</div></div>
+    </section>
+
+    <section class="s-night">
+      <div class="tag"><h2>預けたものが返ってくる時間</h2><span class="when">ここが全部の前提</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>ストリート<br>ギアバッグ</th><td><b>9/13(日) 16:00-24:00</b>／木古内小学校。レース当日に受け取る唯一の荷物</td></tr>
+          <tr><th>バイク</th><td><b>9/13(日) 18:00-21:00</b> または <b>9/14(月) 8:00-12:00</b>／T2</td></tr>
+          <tr><th>バイクギアバッグ（青）<br>ランギアバッグ（赤）</th><td><b>9/13(日) 18:00-21:00</b> または <b>9/14(月) 8:00-12:00</b>／T2</td></tr>
+          <tr><th>パーソナルニーズ<br>バッグ×2</th><td><b>9/14(月) 8:00-12:00 のみ</b>／T2。<b>日曜には返ってこない</b></td></tr>
+          <tr><th>バイクポンプ</th><td>今回は預けないので該当なし（携帯ポンプで完結）</td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">落とし穴</span><div>日曜の夜に回収できるのは<b>バイクと青・赤のギアバッグまで</b>。<b>パーソナルニーズバッグ2つは月曜の朝しか返ってこない</b>。前日回収で月曜に木古内へ行かない計画なら、この2つは置いていくことになる（未回収のバッグは処分）。<b>捨てる前提で中身を決めれば成立する</b>。</div></div>
+    </section>
+
+    <section class="s-night">
+      <div class="tag"><h2>バイクをいつ回収するか</h2><span class="when">空箱が木古内にあるのが全て</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>A 翌朝<br>（現行）</th><td>9/14朝に木古内でバイク回収 → 駅北口で梱包 → 発送 → 表彰式 → 昼のシャトルで函館<br><b>費用 追加0円</b>／レース翌朝に往復2時間半＋屋外で分解梱包／12:00締切がタイト。<b>シャトルは30分毎で冗長性がある</b></td></tr>
+          <tr><th>B 前日<br>鉄道</th><td>9/13フィニッシュ後にT2で回収（18:00-21:00）→ 木古内駅改札で20:30-21:20に購入 → <b>21:30頃発の臨時直行便で七重浜</b> → <b>七重浜から約6km自走</b><br><b>12,000円</b>・クレカのみ・先着／<b>輪行袋なしで乗車可＝分解不要</b>／深夜・疲労状態での6km自走、ライト必携<br><b>大会が仕立てた貸切臨時列車の値段で、通常運賃ではない</b></td></tr>
+          <tr><th>B' 前日<br>普通列車</th><td>輪行袋に詰めて通常列車で函館へ。運賃は1,000円台<br><b>ただし木古内発 函館方面の最終は19:10</b>。フィニッシュ18:30目標、バイク回収が18:00開始 ― <b>事実上不可能</b>。これが12,000円の臨時便が存在する理由</td></tr>
+          <tr><th>C 前日<br>タクシー</th><td>9/13 18:00-21:00、木古内駅北口から宿まで直行。ジャパンタクシー<b>23,280円</b>（自転車1台＋1名）<br><b>要事前申込：9/10 13-17時 ／ 9/11 10-17時、函館アリーナのタクシーデスク</b></td></tr>
+          <tr><th>D 木古内泊</th><td>朝T2まで歩いて回収 → 駅北口で梱包・発送 → 表彰式 → 昼に函館へ<br><b>追加は宿代のみ</b>／9/12にT2へ行くとき宿泊荷物を先に置いていける／<b>全部の問題が消える</b></td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">前提</span><div><b>シャトルバスにバイクは積めない</b>（ガイドに明記）。だから前日に持ち帰るなら鉄道かタクシーの二択。そして決定的なのは ―<b>空箱は函館競馬場から「木古内駅北口」へ運ばれる</b>。復路の発送も木古内駅北口 8:00-12:00。つまり<b>前日にバイクを函館へ持ち帰ると、箱にも輸送サービスにも二度と会えない</b>。</div></div>
+      <div class="warn ok"><span class="mk">結論</span><div>素直に楽になるのは<b>D（木古内泊）</b>。取れないなら<b>A（翌朝）</b>が最も安全 ― シャトルが30分毎で、1本逃しても取り返せる。BとCは「翌朝の往復2時間半を金と深夜の労力で買う」取引。</div></div>
+    </section>
+
+    <section class="s-sea">
+      <div class="tag"><h2>カットオフ</h2><span class="when">各自のスイムスタートから</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>SWIM</th><td>2時間20分 ― スイム出口</td></tr>
+          <tr><th>BIKE</th><td>8:00 B1北斗中央118km ／ 9:00 B3木古内145km ／ 9:40 B2茂辺地162km ／ <b>10:30 T2降車180km</b></td></tr>
+          <tr><th>RUN</th><td>15:00 R7 28km ／ 15:45 R3 33.5km ／ 16:20 R5 37.4km ／ <b>17:00 フィニッシュ</b></td></tr>
+          <tr><th>閉鎖</th><td>最終スイムスタート基準で 24:00 に全コース閉鎖</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="s-sea">
+      <div class="tag"><h2>エイドで出るもの（＝持たなくていいもの）</h2><span class="when">現地調達可</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>BIKE</th><td>水／アクエリアス／<b>アミノバイタル パーフェクトエネルギー</b>／トイレ<br>B1北斗中央 9・63・117km ／ B2茂辺地 21・74・128・161km ／ B3木古内 37・91・145km</td></tr>
+          <tr><th>RUN</th><td>水／アクエリアス／コカ・コーラ／アミノバイタル／バナナ／スナック／スポンジ／トイレ（1.5-2.5km毎）</td></tr>
+          <tr><th>FINISH</th><td>メダル／フィニッシャーシャツ／フィニッシャータオル／牛丼・味噌汁・フルーツ・ソフトドリンク</td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">補足</span><div>バイクの<b>アミノバイタル赤は現地で出る</b>ので買い足し不要。逆にランエイドはカロリー源が薄いので、エネルギー系は自分で持つ方が無難。</div></div>
+    </section>
+
+  </div>
+
+  <div id="panel-pack" role="tabpanel" aria-labelledby="tab-pack" hidden>
+
+    <div class="filterbar">
+      <span class="fl">表示</span>
+      <button type="button" id="f-all" class="on">すべて</button>
+      <button type="button" id="f-open">未チェックのみ＝持っていくもの</button>
+      <span class="fnote" id="fnote"></span>
+    </div>
+
+    <section class="s-bike">
+      <div class="tag"><h2>箱に入れるもの</h2><span class="when">まだ間に合う・9/8までに発送</span></div>
+      <div class="panel">
+        <p class="intro">9/11に函館競馬場で受け取る。<b>ここに入れたものは9/11まで手元にない</b>が、逆に言えば<b>そこから先で使うものは全部入れていい</b>。「＋」は今から足すべきもの。</p>
+        <ul id="boxlist"></ul>
+      </div>
+      <div class="warn"><span class="mk">背負い方</span><div>ウェット・シューズ・ヘルメットが箱の中なので、競馬場から宿まで6km自走するときに全部持つことになる。<b>ビンディングシューズは履いて、ヘルメットは被って走ればいい</b> ― そうすれば背負うのは<b>防水バッグに入れたウェットとツールバッグだけ</b>。参加賞のボトルはボトルケージへ。</div></div>
+      <div class="warn"><span class="mk">組立</span><div><b>DHバーとクイックレバーを競馬場で取り付ける</b>。DHバーは前後・角度・高さの3方向を再現する必要がある。<b>マーキングも写真も、もう間に合わない</b>ので、フィッティング時の設定値が手元にあるか確認して、なければACTIVIKEに問い合わせなさい。締め値を測るならトルクレンチは預け入れ荷物で。</div></div>
+      <div class="warn ok"><span class="mk">Tシャツ</span><div><b>3枚要らない。2枚で回る。</b><br>①9/11は着ていくTシャツ ②<b>9/12はトライスーツで動く</b> ― 自走11km → T1預託 → 試泳 → 帰路、全部トライスーツで完結するので上にウィンドブレーカーを羽織るだけでいい ③9/13のフィニッシュ後は<b>フィニッシャーTシャツをそのまま着る</b>（サイズ自己申告で受け取る方式）。ストリートギアバッグには下着・長ズボン・ライトダウンだけ入れておけば足りる ④9/14は9/11のTシャツかフィニッシャーTを再利用<br>唯一の穴は<b>完走しないとフィニッシャーTが手に入らない</b>ことだけれど、そこはTシャツの心配をする場面ではないわね。</div></div>
+      <div class="warn"><span class="mk">割り切り</span><div>ヘルメットもシューズも箱の中で不安になるかもしれないけれど、<b>そもそもバイクが届かなければ出走できない</b>。だから小物を手荷物に分散しても意味はない。<b>分散に悩むより、追跡番号を控えて9/10のうちに配達状況を確認する方が効く</b>。<br>手荷物に残す基準はただ一つ ―<b>「代替不可 × 軽い × 壊れ物」</b>。トライスーツ、ゴーグル、電子機器、身分証。それだけ。</div></div>
+    </section>
+
+    <section class="s-run">
+      <div class="tag"><h2>飛行機で持っていくもの</h2><span class="when">箱にないものは全部これ</span></div>
+      <div class="panel">
+        <p class="intro">箱に入っていないものは、すべて自分で運ぶか宿へ別送するかの二択。<b>宿宛の別送はまだ間に合う</b>（到着日は9/10か9/11指定・元払いのみ）ので、ライトダウンや着替えのようにかさばるものはそちらへ回してもいい。</p>
+        <ul id="carrylist"></ul>
+      </div>
+      <div class="warn"><span class="mk">原則</span><div><b>「代替不可 × 軽い」ものは必ず手荷物</b>。トライスーツ、ゴーグル、身分証、クレカ。<b>トライスーツを送りたくないという勘は正しい</b> ― 現地で買えないものを輸送に預けない、それだけの話。</div></div>
+      <div class="warn"><span class="mk">最重要</span><div><b>ボトル3本</b>。バイクに付けたまま送っていないなら、これが今いちばん危ない抜け。アクエリアスを詰める作戦も、1時間1本の水分計画も、全部ボトルが前提。<b>今すぐ確認して。</b></div></div>
+    </section>
+
+
+    <section class="s-bike">
+      <div class="tag"><h2>どの日に何を背負うか</h2><span class="when">背中の設計</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>9/11<br>6km</th><td>競馬場 → 宿。<b>大会バックパック1つ</b>（レースキット一式）＋工具のサコッシュ。ボトルはボトルケージへ</td></tr>
+          <tr><th>9/12<br>11km</th><td>宿 → T1。<b>自前＋大会バックパックの2つ</b>。青・赤バッグ、ウェット、ゴーグル。<b>ヘルメットは被る</b>。T1で青を手放したら以降は赤だけ</td></tr>
+          <tr><th>9/13<br>シャトル</th><td>宿 → T1。ストリートギアバッグ・PNバッグ2つ・ボトル1本。<b>全部T1で手放すので帰りは手ぶら</b></td></tr>
+          <tr><th>9/14<br>シャトル</th><td>宿 → 木古内。<b>箱に詰めて帰す荷物一式＋梱包工具</b>。往路で一番重いのはここ</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="s-sea" data-list="pre"></section>
+    <section class="s-sea" data-list="kit"></section>
+    <section class="s-sea" data-list="checkin"></section>
+    <section class="s-sea" data-list="sat"></section>
+    <section class="s-run">
+      <div class="tag"><h2>当日の朝、宿から持って出るもの</h2><span class="when">これで全部</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>もうT1にある</th><td><b>バイク本体</b>（ラックに掛かっている）と<b>青バッグ</b>（フックに掛かっている）。前日に預け済みなので朝は持っていかない</td></tr>
+          <tr><th>もうT2にある</th><td><b>赤バッグ</b>。木古内側。当日は一切触れない</td></tr>
+          <tr><th>着ていく</th><td>トライスーツ／ウェットスーツ／リストバンド／アンクルバンド／ナンバータトゥー（前夜に貼る）</td></tr>
+          <tr><th>預ける袋 ①</th><td><b>ストリートギアバッグ</b>（前夜に中身を詰める）― フィニッシュ後の防寒着・靴・着替え。T1で預けて木古内小学校へ運ばれる</td></tr>
+          <tr><th>預ける袋 ②③</th><td><b>パーソナルニーズバッグ×2</b>（前夜に中身を詰める）― バイク用とラン用</td></tr>
+          <tr><th>ポンプ</th><td><b>携帯ポンプ1本</b>。空気圧を調整したらそのままバイクに載せる。<b>預託作業なし＝月曜の回収物も1つ減った</b></td></tr>
+          <tr><th>バイクに付ける</th><td><b>ハンドルのボトル1本</b>（フレームの2本は前日にセット済み）／トップチューブボックスの中身（熱中飴・梅）／サイコン／GPS時計</td></tr>
+          <tr><th>その場で飲む</th><td>朝食、スタート前ジェル、<b>T1でのアミノバイタル赤1本</b></td></tr>
+          <tr><th>スイム用</th><td>ゴーグル（＋予備）／支給スイムキャップ／ワセリン／メガネ（預かりへ・番号記入済み）／サンダル</td></tr>
+          <tr><th>その他</th><td>ヘッドライト（真っ暗の中で準備する）／スマホ／羽織りもの</td></tr>
+        </table>
+      </div>
+      <div class="warn ok"><span class="mk">ドリンク</span><div><b>フレームの2本は前日にセットしてしまってよい</b>。9月中旬の道南は夜間15℃前後で、キャップ付きボトルのアクエリアスが一晩で傷むことはない。ガイドも青バッグの例に「補給食と水分（レース当日バイクにセットすることも可能）」と書いていて、前日装着を禁じていない。<b>朝に運ぶ重量が1.5kg減る</b>のは4時のシャトルで大きい。<br>ただし温度以外のリスクは残るので、①<b>飲み口は必ず閉じる</b>（夜露・埃・虫）②<b>ボトルにゼッケン番号を書く</b>（1,300人のトランジションで取り違えが起きる）③バイクカバーは禁止なので<b>むき出しで一晩</b>だと理解しておくこと。</div></div>
+      <div class="warn"><span class="mk">朝に回す</span><div><b>ハンドルの1本だけは当日朝</b>にする。スタート直前の気温と体調を見てPH500の量を決められるし、万一フレームの2本が濡れ・汚れていたときの差し替えにもなる。T1は5:00-6:00にバイクへアクセスできる。</div></div>
+      <div class="warn ok"><span class="mk">運び方</span><div>ボトル前日装着＋フロアポンプ不要で、朝運ぶのは<b>ボトル1本＋袋3つだけ</b>。<b>大会バックパック</b>に全部放り込んで背負えば<b>手ぶらでシャトルに乗れる</b>。T1で仕分けて、空になったバックパックはストリートギアバッグに入れて預ければフィニッシュで回収できる。</div></div>
+    </section>
+
+    <section class="s-sea" data-list="sun"></section>
+    <section class="s-sea" data-list="swim"></section>
+    <section class="s-bike" data-list="bikebag"></section>
+    <section class="s-bike" data-list="onbike"></section>
+    <section class="s-run" data-list="runbag"></section>
+    <section class="s-bike" data-list="pnbike"></section>
+    <section class="s-run" data-list="pnrun"></section>
+    <section class="s-night" data-list="street"></section>
+    <section class="s-sea">
+      <div class="tag"><h2>補給設計 ― エイドで足りる分／足りない分</h2><span class="when">1時間 300kcal・糖質80g</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>前提</th><td>バイク8時間＋ラン5時間＝<b>約13時間の補給時間</b>（スイム中は補給しない）。必要量は <b>約3,900kcal・糖質約1,000g</b></td></tr>
+          <tr><th>アミノバイタル<br>パーフェクトエネルギー</th><td>130g／<b>180kcal・糖質40.7g</b>・食塩相当量0.04g（＝<b>ナトリウムはほぼゼロ</b>）・アミノ酸5.0g</td></tr>
+          <tr><th>アクエリアス</th><td>100mlあたり18kcal・炭水化物4.6g・食塩相当量0.1g<br>→ <b>500mlで90kcal・糖質23g・ナトリウム約200mg</b></td></tr>
+        </table>
+      </div>
+      <div class="panel scroller" style="margin-top:14px">
+        <table class="sched">
+          <tr><th>BIKE<br>エイド10回</th><td>B1 北斗中央 9・63・117km（3回）／B2 茂辺地 21・74・128・161km（4回）／B3 木古内 37・91・145km（3回）<br>1回で<b>アミノバイタル1本＋アクエリアス500ml＝270kcal・糖質64g</b>。10回で <b>2,700kcal・糖質637g</b><br>→ バイク8時間の必要量 2,400kcal を<b>エイドだけで超える</b></td></tr>
+          <tr><th>RUN<br>エイド20回</th><td>R1-R6 各3回＋R7 2回、1.5-2.5km毎＝<b>約15分毎</b>。水・アクエリアス・コーラ・アミノバイタル・バナナ・スナック<br>1回20g糖質でも20回で400g＝必要量に届く。<b>ただしカップは小さく、3周目は20-21時で品切れリスクがある</b></td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">最大の穴</span><div><b>ナトリウム</b>。アミノバイタル赤は食塩相当量0.04gで実質ゼロ、アクエリアスも500mlで約200mg。<b>エイドから8時間かけて取れるナトリウムは合計2,000mg程度</b>しかない。発汗によるロスは一般に500-1,000mg/h で、13時間なら6,500-13,000mg。<b>ここは自前で埋めるしかない</b>。塩タブなら1時間2粒ペース。</div></div>
+      <div class="panel scroller" style="margin-top:14px">
+        <table class="sched">
+          <tr><th>製品</th><td><b>1単位あたりのナトリウム</b>／備考</td></tr>
+          <tr><th>PF&amp;H<br>PH 500</th><td><b>Na 250mg／1錠</b>（500mlの水に溶かす）・11kcal・炭水化物1.7g。15錠 3,240円＝216円/錠。<b>微発泡の溶かすタイプ</b>。ブリーフィングでコーチが名前を挙げていたのはこれ。<b>この大会にPF&amp;Hがブース出展する</b></td></tr>
+          <tr><th>熱中飴<br>レモン塩味</th><td><b>Na 約126mg／1粒</b>（食塩相当量0.32g・1粒5g）。市販の舐める系では最も濃い。安くてどこでも買える</td></tr>
+          <tr><th>応塩飴</th><td>Na 約67mg／1粒（食塩相当量0.17g）</td></tr>
+          <tr><th>塩分チャージ<br>タブレッツ</th><td><b>Na 約47mg／1粒</b>（食塩相当量0.119g）。<b>低すぎる</b> ― 500mg/h を取るには1時間10粒。日常の熱中症対策用であって、13時間レースの主力にはならない</td></tr>
+          <tr><th>inタブレット塩分プラス<br>アクエリアス塩分補給タブレット</th><td>Na 約39mg／1粒（食塩相当量0.1g）。同上</td></tr>
+          <tr><th>梅干し<br>（個包装）</th><td>塩分2g級なら <b>Na 約800mg／1個</b>。<b>単位あたりの効率は圧倒的</b>。ランのPNに入れる価値がある</td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">収支</span><div>13時間で追加したいナトリウムを 500mg/h とすると <b>約6,500mg</b>。エイドのアクエリアスから取れるのが 2,000-2,500mg、自前ボトル3本にPH500を1錠ずつで 750mg。<b>残り約3,500mgを舐める系で埋める</b> ― 熱中飴なら28粒、梅干しなら4〜5個。<b>塩分チャージタブレッツだけで埋めようとすると70粒以上</b>になる。</div></div>
+      <div class="warn ok"><span class="mk">節約</span><div>エイドを主軸にすると<b>Maurten は8袋も要らない</b>。バイク序盤の2時間分＝<b>2-3袋で足りる</b>。<b>アミノバイタル赤の買い足しも不要</b>（コース上で10本もらえる）。浮いた分をナトリウムとカフェインに回しなさい。</div></div>
+    </section>
+
+    <section class="s-sea" data-list="fuel"></section>
+    <section class="s-sea" data-list="care"></section>
+    <section class="s-sea" data-list="power"></section>
+    <section class="s-bike" data-list="spare"></section>
+    <section class="s-night" data-list="stay"></section>
+    <section class="s-run" data-list="ng"></section>
+
+    <section class="s-night">
+      <div class="tag"><h2>もらうもの → どう持ち帰るか</h2><span class="when">帰りは行きより増える</span></div>
+      <div class="panel scroller">
+        <table class="sched">
+          <tr><th>受付</th><td>ガイド記載の<b>レースキット</b>（ゼッケン／ギアバッグ3枚／PNバッグ2枚／スイムキャップ／タトゥー／リストバンド／ステッカー5種）<b>＋ガイドに載っていない参加賞</b>：<b>大会バックパック</b>／<b>アイアンマンボトル</b>（色を選べる）／<b>どら焼き</b>／ゼッケンベルト</td></tr>
+          <tr><th>フィニッシュ</th><td><b>丸型メダル／フィニッシャーシャツ（サイズ自己申告）／フィニッシャータオル</b></td></tr>
+          <tr><th>増える量</th><td><b>バックパック1個＋ボトル＋タオル＋シャツ＋メダル</b>。さらに使用済みウェット・シューズ2組・濡れたウェア</td></tr>
+        </table>
+      </div>
+      <div class="warn"><span class="mk">本命</span><div>持ち帰りは<b>復路の箱に載せる</b>のが基本。ただし<b>木古内で12:00までに詰め終える</b>必要があるので、9/14の朝に宿を出る時点で仕分けが終わっていること。シャトルは往復2時間半、取りに戻れない。</div></div>
+      <div class="warn"><span class="mk">例外</span><div><b>メダルは箱に入れない</b>（手荷物へ）。<b>濡れたウェットとウェアも入れない</b> ― 自宅到着は9/15以降、密閉数日でカビる。東横INNはフロントにヤマトの元払い伝票があるので、<b>7:45のチェックアウト時に自宅へ発送</b>する。</div></div>
+    </section>
+
+  </div>
+
+  <footer>
+    出典：IRONMAN Japan South Hokkaido 2026 Athlete Information Guide ver1.0 ／ 選手輸送ガイド Rev.3.1（これらを最新の正とする）／ レース前ブリーフィング ／ 過去大会の参加者レポート ／ 本人の予約メール（ANA・Booking.com、2026-09-05 再確認済み）。<br>
+    最終判断は現地のアナウンス優先。ウェットスーツ可否は土曜12:00以降にイベントインフォメーションで暫定掲示、確定は当日朝の場内アナウンス。
+  </footer>
+</div>
+
+<script>
+const BOX = [
+  ["バイク本体（ボトル3本装着済み）",""],
+  ["DHバー・クイックレバー×2（エアクッション包み）","9/11に競馬場で取り付ける"],
+  ["ウェットスーツ＋モンベル防水バッグ",""],
+  ["手ぬぐい",""],
+  ["ビンディングシューズ","9/11は履いて自走する"],
+  ["ヘルメット","9/11は被って自走する"],
+  ["バイク用手袋",""],
+  ["ツールバッグ：六角×2・携帯空気入れ・空気圧計・予備チューブ×2・クイックリンク・チェーンカッター",""],
+  ["補給：アミノバイタル赤ショット×2",""],
+  ["補給：ソイジョイ×2・ミニようかん×3",""],
+  ["補給：梅干し純 4袋",""],
+  ["＋ 塩タブ or 熱中飴 30粒前後","<b>梅干し純だけではナトリウムが足りない</b>。13時間で追加6,500mgの試算",true],
+  ["＋ ラン後半の保険ジェル 4〜6本","3周目は20-21時。エイドの品切れリスクに備える",true],
+  ["＋ ソックス3足（バイク用・ラン用・予備）","",true],
+  ["＋ パンツ3枚","<b>A＝9/11-9/12に着用／B＝ストリートギアバッグに入れてフィニッシュ後〜9/14（9/12の夜に袋詰めするので乾いた状態で確保）／C＝予備</b>。Cがあれば9/12の夜に洗濯が乾かなくても、雨で濡れても回る",true],
+  ["＋ 寝る用のボロいパンツ（捨ててくる）",""],
+  ["＋ ウィンドブレーカー","ランギアバッグ行き",true],
+  ["＋ 防寒用の手袋","バイク用グローブとは別に1組。夜は本気で寒い",true],
+  ["＋ 帽子 or バイザー",""],
+  ["＋ ワセリン（大きめ1個）","",true],
+  ["＋ 乳首テープ・絆創膏",""],
+  ["＋ 日焼け止め・リップ",""],
+  ["＋ 常備薬・胃薬",""],
+  ["＋ 油性ペン","ボトルとメガネへの記名用"],
+  ["＋ FIBERGRIP","競馬場での組立で使うので箱が正しい。開梱したらすぐ出す"],
+  ["＋ トルクレンチ（買うなら）","組立で使う。<b>開梱したら必ず持ち出す</b> ― 空箱に残すと9/14に梱包できない",true],
+  ["＋ ジップロック・ゴミ袋・濡れ物用ビニール","帰りに濡れたウェットを入れる"],
+  ["＋ 糸ようじ（3日分）",""],
+  ["＋ 捨ててもいいビーサン","スタート地点で脱ぎ捨てる用。サンダルとは別"],
+  ["＋ 輪行袋（持っていくなら）","宿へのバイク持ち込み対策"],
+  ["【入れない】モバイルバッテリー","リチウム電池。航空も宅配便も制限対象",true]
+];
+
+const CARRY = [
+  ["トライスーツ","<b>代替不可・軽い。手荷物一択</b>",true],
+  ["ゴーグル（＋予備1個）・曇り止め","代替不可・壊れ物。<b>最大の抜けだった項目</b>",true],
+  ["ランニングシューズ","サイズの合うものは現地で買えない",true],
+  ["ライトダウン","機内で寒いときにも使える"],
+  ["長ズボン",""],
+  ["サンダル","9/11の夜から使う。9/13朝にストリートギアバッグへ入れる"],
+  ["ゼッケンベルト","<b>手荷物にするのは正解</b>。軽くてレース必須、失うと安全ピン運用になる"],
+  ["電動歯ブラシ","<b>充電器は要る？</b> 3泊なら充電なしで持つか確認"],
+  ["Garmin・サイコン・心拍センサー＋充電ケーブル","精密・高価",true],
+  ["モバイルバッテリー","<b>預け入れ不可・機内持ち込みのみ・収納棚も不可</b>",true],
+  ["ヘッドライト＋予備電池","レース必須。切れたら真っ暗",true],
+  ["サングラス","壊れ物なので手荷物",true],
+  ["写真付き身分証明書（マイナンバーカードでOK）","<b>AIGに「運転免許証、パスポート、マイナンバーカード」と明記</b>",true],
+  ["運転免許証も別に持つ","<b>1枚に集約すると落としたとき身分証と保険証を同時に失う</b>"],
+  ["クレジットカード現物","ロールダウン用。Amex・Diners・現金・Apple Pay不可",true],
+  ["マイナ保険証の利用登録を確認","マイナポータルで「登録済」表示。電子証明書の期限も見ておく",true],
+  ["「資格情報のお知らせ」","カードリーダーが読めなかったときの保険。スクショでも可"],
+  ["着ていく服・スマホ・財布","",true],
+  ["コンパクトになる肩掛けバッグ",""],
+  ["<b>自前のリュック</b>","<b>9/12にT1まで11km自走するとき、青・赤バッグとウェットを背負う</b>。肩掛けでは無理",true]
+];
+
+const DATA = {
+  pre:{title:"出発前に東京で潰す", when:"~9/9",
+    intro:"現地調達は時間を失う。必要なものは余分に買って持参、不安要素はこっちで全部消す。",
+    items:[
+      ["<b>済</b> 携帯ポンプで900kPaまで入ることを確認","電動ポンプもフロアポンプも不要。装備が1つ減った"],
+      ["<b>済</b> チェーン交換（CN-HG601-11）","交換済み。<b>新品なので洗浄も注油もしない</b>"],
+      ["<b>新品チェーンは洗わない・注油しない</b>","工場出荷時のグリスは<b>微細なバリを保護するためのもの</b>。脱脂してサラサラのオイルを塗るとバリがプレート同士を攻撃し、<b>チェーン寿命を著しく縮める</b>。ショップの推奨も「300〜500km乗ってから状態を見て洗浄・注油」。ラストライド後は<b>ウエスで表面を軽く拭くだけ</b>",true],
+      
+      ["<b>済</b> 車検項目の確認","エンドプラグ／空気圧／ブレーキ／ボトルケージ最低1つ／ディスクホイール不使用"],
+      ["競馬場でボトルケージのネジを増し締め","富岡IC進入の段差でボトル落下が多発。組立時に確認",true],
+      
+      
+      ["<b>エイド構成そのものを4〜5時間ライドで検証</b>","「アミノバイタル赤を1時間1本＋アクエリアス」を実走で通す。<b>Maurtenを試すより優先度が高い</b> ― 本番で実際に飲むのはこの組み合わせだから。ゼリーを8本飲み続けられるかが最大の未検証点",true],
+      ["<b>DHバーのポジション設定値を手元に用意する</b>","バイクは発送済みでマーキングも写真ももう間に合わない。<b>ACTIVIKEのフィッティング記録（前後・角度・高さの数値）を取り寄せるか、手元の控えを確認する</b>。競馬場での組み直しで再現できないと180kmが台無しになる",true],
+      ["<b>9/11の開梱時に、箱の中の詰め方を写真に撮る</b>","<b>9/14に木古内の屋外で、疲労した頭で同じ形に戻す</b>ことになる。開ける前と開けた直後を撮っておけば再現できる",true],
+      ["かさばるものを宿宛に別送するか決める","ライトダウン・長ズボン・着替え・タオルなど。<b>到着日は9/10か9/11指定・元払いのみ</b>。使わないなら全部機内へ"],
+      ["民間医療保険の補償内容確認（救急搬送）","医療対応の費用は全額自己負担"],
+      ["IRONMAN Tracker アプリ／IRONMAN Profile のログイン確認","ロールダウンで必要"],
+      ["コース・カットオフ・関門位置を頭に入れる","コースを熟知しているのは全アスリートの義務"]
+    ]},
+  kit:{title:"レースキットを受け取ったらやる作業", when:"9/11の夜に宿で",
+    intro:"ステッカー貼りを宿で全部終わらせる。翌朝にやると必ず慌てる。",
+    items:[
+      ["シートポストステッカー：番号が後方を向き横から見えるように巻く","",true],
+      ["ヘルメットステッカー：前面に貼る","当日のヘルメットチェック前。写真の写りにも効く",true],
+      ["ギアバッグステッカー：青・赤・ストリートの前面に貼る","",true],
+      ["パーソナルニーズステッカー：持ち手に巻いて裏面同士を貼り合わせる","",true],
+      ["バイクポンプステッカーは使わない","フロアポンプを持っていかないので預託しない。携帯ポンプはそのままバイクに載せる"],
+      ["ナンバータトゥーを右上腕に貼る","濡れ布で60秒圧着。着用必須",true],
+      ["レースナンバー（ゼッケン）をレースベルトに装着","ゼッケンを体の前面に着けるのは<b>ランのみ</b>。バイクはシートポストとヘルメットのステッカーで識別する"],
+      ["メガネに自分のレースナンバーを記入","スイム出口の預かりテーブルに預ける"],
+      ["アンクルバンドとリストバンドの番号が一致しているか確認","紛失時の再発行は30,000円"]
+    ]},
+  checkin:{title:"チェックインに持っていくもの", when:"9/11 10:00-17:00",
+    intro:"函館アリーナ。本人のみ受取、事前郵送なし。ブリーフィングは1回参加必須。",
+    items:[
+      ["写真付き身分証明書（免許証／パスポート／マイナンバーカード）","",true],
+      ["クレジットカードの現物","ロールダウン用。Amex・Diners・現金・Apple Pay不可、分割不可"],
+      ["油性ペン（記名用）",""],
+      ["レースキットを持ち帰る手段","バッグ5枚＋大会バックパック＋ボトル＋どら焼き。そのまま宿まで6km自走する"],
+      ["参加賞のボトルは色を選べる","ブースを順に回って受け取る方式。もらい忘れに注意"],
+      ["ブリーフィングでメモを取るもの","直前変更（スイム時刻・臨時電車・クマ警報）が現地発表される"]
+    ]},
+  sat:{title:"9/12に持って出るもの", when:"T1・T2・試泳",
+    intro:"バイクは自走、それ以外は無料シャトル。朝の出発時点で3つとも身につけている必要がある。積み忘れ＝取りに戻れない。",
+    items:[
+      ["バイク本体（シートポストステッカー貼付済み・空気圧OK）","",true],
+      ["ヘルメット","被って走る。T1のバイク預託時にヘルメットチェック",true],
+      ["バイクギアバッグ（青）","T1へ",true],
+      ["ランギアバッグ（赤）","T2へ。木古内側",true],
+      ["試泳3点：リストバンド／アンクルバンド／支給スイムキャップ","アンクルバンドはバイク預託後に受け取る",true],
+      ["ウェットスーツ・ゴーグル（試泳用）","本番の装備をそのまま試す。肩出し・足先注水も確認"],
+      ["バックパック2つ（自前＋大会）","当日と同じ積み方で一度背負って試しておく",true],
+      ["試泳後の着替えとタオル、濡れ物用の袋",""],
+      ["シャトル移動中の羽織りもの・行動食","上磯↔木古内は片道30分"],
+      ["バイクカバーは使わない","夜間ラッキングで全体を覆うカバーは禁止"]
+    ]},
+  sun:{title:"9/13の朝、T1に持ち込むもの", when:"5:00-6:00／6:15退出",
+    intro:"函館駅前04:00-05:00発の選手専用シャトル（予約済み）でT1へ。預けものは6:00締切。暗いのでライトがあると楽。",
+    items:[
+      ["ストリートギアバッグ（預託 5:00-6:00）","木古内小学校へ輸送される",true],
+      ["バイク・ランのパーソナルニーズバッグ（預託 5:00-6:00）","",true],
+      ["携帯ポンプで空気圧を最終調整","フロアポンプは持っていかないので預託作業なし。そのままバイクに載せてスタートする"],
+      ["ハンドルのボトル1本をセット","フレームの2本は前日装着済み。この1本を最初の1時間で飲み切って交換用にする"],
+      ["前日装着したボトルの飲み口と汚れを確認","夜露・埃。気になれば朝の1本と差し替える"],
+      ["トップチューブボックスに塩系（男梅など）を補充","上端から10cm超は不可、ヘッドセットにかかるのも不可"],
+      ["タイヤの空気を入れ直す",""],
+      ["サイコン・GPS時計を装着（充電済み）","トンネルでGPSが切れて距離がズレる"],
+      ["朝食・スタート前ジェル","空腹の時間を作らない"],
+      ["ヘッドライト or スマホライト","暗い中での準備"],
+      ["バイクの横の地面に物を置かない","ケース・バッグ類も禁止"]
+    ]},
+  swim:{title:"スイム／スタート時に身につけるもの", when:"6:30 ローリングスタート",
+    intro:"ウォームアップスイムは6:00-6:15。水温24.5℃以下ならウェットスーツは任意。",
+    items:[
+      ["ウェットスーツ","24.5℃以下＝任意、16℃未満＝義務。可否に関わらず必ず持参",true],
+      ["トライスーツ（ジッパーは常に一番下まで）","開放は是正指示→従わないと60秒ペナルティ",true],
+      ["ゴーグル（＋予備1個）","同モデルの新品があるとブイが見やすい。曇り止めも"],
+      ["支給スイムキャップ","自前キャップを被る場合はその上から公式キャップ",true],
+      ["ナンバータトゥー（右上腕）／アンクルバンド／リストバンド","",true],
+      ["ワセリン（首・脇・ウェットの擦れる所）",""],
+      ["メガネは預かりテーブルへ（ナンバー記入済み）","スイム出口で預けるのが基本"],
+      ["コンタクトなら度付きゴーグル or 予備コンタクト",""],
+      ["サンダル（スタートまでの足元）",""]
+    ]},
+  bikebag:{title:"バイクギアバッグ（青）", when:"9/12 10:00-17:00 T1",
+    intro:"スイム→バイク。バイクに付けられないものは全部ここ。T1のチェンジテントで使う。",
+    items:[
+      ["バイクシューズ（ペダルに付けておいてもよい）","",true],
+      ["ヘルメット","前夜このバッグに入れて預けるか、当日朝かぶって入場",true],
+      ["サングラス／ソックス／タオル",""],
+      ["補給食・ドリンク（当日朝バイクに直接セットしてもよい）",""],
+      ["日焼け止め・ワセリン",""],
+      ["アームカバー／ウィンドブレーカー",""],
+      ["スイムギアを回収する余裕","ウェット・ゴーグル・キャップをこの袋に入れて出口で預ける"]
+    ]},
+  onbike:{title:"バイク本体にセット／携行する工具", when:"180km・茂辺地4本",
+    intro:"茂辺地の約1km・勾配8-10%を計4回。コース上のメカニックは限られるので自走復旧できる装備で。",
+    items:[
+      ["パンク修理キット（予備チューブ2本・タイヤレバー・CO2×2＋インフレーター）","強く推奨",true],
+      ["マルチツール（チェーンカッター内蔵）／ミッシングリンク予備",""],
+      ["ボトルケージ（最低1つ／車検項目）","",true],
+      ["Maurten Drink Mix 320 の2倍濃度ボトル×2（4時間分）","スイムアップ直後用に1倍濃度の3本目を作る運用もあり"],
+      ["トップチューブボックス＋塩系（男梅など）",""],
+      ["レインジャケット／エマージェンシーブランケット","SAG待ちの冷え対策として推奨"],
+      ["補給を取るポイントを2-3か所決めておく","下りで取る。心拍が上がっていると入らない"],
+      ["携帯電話（携行は可）","通話・メッセージ・音楽再生は禁止。ヘッドホンも不可"],
+      ["ゴミは必ずエイドの指定ゴミ捨てエリアへ","ポイ捨てはブルーカード3分"]
+    ]},
+  runbag:{title:"ランギアバッグ（赤）", when:"9/12 10:00-17:00 T2",
+    intro:"バイク→ラン。T2でヘルメットとバイクシューズを含む全バイクギアをこの赤バッグに入れて預ける。",
+    items:[
+      ["ランニングシューズ","",true],
+      ["レースナンバー（ゼッケン）＋レースベルト","ラン中は体の前面。参加賞にゼッケンベルトが含まれる年もある",true],
+      ["ヘッドランプ","日没17:50。推奨装備。電池残量を確認",true],
+      ["乾いた新しいソックス＋ワセリン","T2で履き替えると靴擦れがかなり減る"],
+      ["帽子／バイザー／サングラス",""],
+      ["反射素材のウェア／ウィンドブレーカー","",true],
+      ["補給食・ジェル・塩タブ","ランエイドはカロリー源が薄い"],
+      ["着替え・タオル",""]
+    ]},
+  pnbike:{title:"バイク・パーソナルニーズ", when:"B1 北斗中央 / 9・63・117km",
+    intro:"北斗中央エイドで3回受け取れる。落車・ボトル落下時の保険。",
+    items:[
+      ["予備の補給（ジェル・ドリンク粉の小分け）","ボトルを丸ごと失っても復旧できる量"],
+      ["予備のCO2ボンベ／チューブ",""],
+      ["味変用の固形食（塩多めのおにぎり・濡れせんべい等）","カロリー計算には入れない。よく噛む"],
+      ["アームウォーマー／ウィンドブレーカー／塩タブ",""]
+    ]},
+  pnrun:{title:"ラン・パーソナルニーズ", when:"R7 / 13.6km・27.8km",
+    intro:"2回通過。トランジションには取りに戻れないので、日没後に必要なものはここに。",
+    items:[
+      ["ヘッドランプ（予備 or 本体）","",true],
+      ["軽量ジャケット／防寒具／予備のソックス",""],
+      ["エネルギー系の補給・カフェイン",""],
+      ["捨ててもいいポンチョ",""],
+      ["テンションが上がるもの（好きな食べ物）",""]
+    ]},
+  street:{title:"ストリートギアバッグ（フィニッシュ後）", when:"木古内小学校で受取",
+    intro:"支給バッグのみ使用可。返却場所は木古内小学校（体育館）。フィニッシュゲートからは少し歩く。貴重品は入れない。",
+    items:[
+      ["防寒着 上下（ダウン級）","夜は本気で寒い",true],
+      ["履き替え用のシューズ","",true],
+      ["着替え一式・タオル・下着",""],
+      ["スマホの充電器・モバイルバッテリー",""],
+      ["リカバリー用の補給・プロテイン",""],
+      ["ニット帽・手袋",""]
+    ]},
+  fuel:{title:"自前で持つ補給 ― これだけ", when:"エイド主軸の前提で",
+    intro:"エイドが回っていれば糖質はほぼ足りる。自前で用意するのは「エイドに無いもの」と「エイドが機能しなかったときの保険」の2種類だけ。",
+    items:[
+      ["PF&H PH 500 タブレット（Na 250mg/錠）","<b>本命</b>。自前ボトル3本に1錠ずつ＋PNに数錠。微発泡なので満タンのボトルには入れず、半分飲んでから投入する。<b>週末のライドで必ず試すこと</b>",true],
+      ["熱中飴レモン塩味（Na 約126mg/粒）を30粒前後","舐める系ではこれが最も濃い。バイクのトップチューブボックスとランのポケットに分散",true],
+      ["個包装の梅干し 4〜5個","1個でNa 800mg級。効率は圧倒的。ランのPNに入れる。飴が受け付けなくなったときの逃げ道でもある",true],
+      ["【主力にしない】塩分チャージタブレッツ系","Na 47mg/粒では13時間分を賄えない。口寂しさ用として少量なら可"],
+      ["スタート時のボトル3本はアクエリアスを詰める","<b>コース上で出るものと同一＝未検証リスクがゼロ</b>。2Lペットボトル1本を9/12の朝に宿で小分けし、<b>フレームの2本はそのままT1でバイクに装着</b>。ハンドルの1本だけ当日朝",true],
+      ["ボトル3本にゼッケン番号を書く","前日装着するなら必須。1,300人のトランジションで取り違えが起きる",true],
+      ["アミノバイタル赤 1本を T1（スイムアップ直後）に","スイム1時間15分は無補給。朝食から4時間経っている。<b>「スタート〜B1」より「スイム明け」に置く方が効く</b>",true],
+      ["【本番では使わない】Maurten","未検証のものをレース当日に初投入しない。手持ちはバイクPNに入れて<b>保険扱い</b>にしておけばいい"],
+      ["ラン後半の保険ジェル 4〜6本","3周目（28km以降）は20-21時で品切れリスク。赤バッグとランPN（R7）に分散",true],
+      ["カフェイン 2回分（ジェル or 錠剤）","バイクエイドにカフェインはない。ランのコーラが唯一。バイク後半とラン後半に1回ずつ"],
+      ["バイクPN用の予備補給（B1で3回受け取れる）","ボトル落下・受け取り損ねの復旧用。ジェルとドリンク粉の小分け"],
+      ["味変用の固形食を1〜2個","塩多めのおにぎり・濡れせんべい。カロリー計算には入れない、よく噛む"],
+      ["【買わない】アミノバイタル赤の買い足し","バイクエイドで10本もらえる。手持ちがあればPNの保険に回す"],
+      ["【買わない】Maurten 8袋","エイド主軸なら2-3袋で足りる。差額をナトリウムとカフェインに回す"],
+      ["水分は1時間ボトル1本、暑ければ2本","腕の汗が乾いてきたら摂取不足のサイン"],
+      ["スイムアップ直後の1本","1倍濃度を作って一気飲みする運用"]
+    ]},
+  care:{title:"ケア用品・消耗品", when:"レース前後",
+    intro:"忘れると当日どうにもならない小物。100均で足りるものが多い。",
+    items:[
+      ["ワセリン（大きめ1個）","首・脇・股・足。T2でも使う"],
+      ["乳首テープ／絆創膏／テーピング",""],
+      ["日焼け止め（顔・体）とリップ",""],
+      ["爪切り（足の爪は前々日までに）",""],
+      ["痛み止め・胃薬・整腸剤などの常備薬","健康保険証も"],
+      ["洗濯ネット（100均の小さいもの）","氷や塩を入れる袋は自分で持参"],
+      ["ゴミ袋・ジップロック・濡れ物用ビニール",""],
+      ["汗拭きシート・ウェットティッシュ",""],
+      ["着圧ソックス／リカバリーサンダル",""],
+      ["虫よけ／トイレットペーパー少量",""]
+    ]},
+  power:{title:"電源・電子機器", when:"前夜に全部満充電",
+    intro:"当日は充電できない。前夜に満充電にして、朝に外し忘れないこと。",
+    items:[
+      ["GPS時計＋充電ケーブル","",true],
+      ["サイコン＋充電ケーブル、予備マウント",""],
+      ["心拍センサー（電池残量／予備電池）",""],
+      ["ヘッドランプ＋予備電池 or 予備本体","",true],
+      ["リアライト（夜間の自走用）",""],
+      ["スマホ＋充電ケーブル＋モバイルバッテリー","<b>モバイルバッテリーは預け入れ絶対不可・機内持ち込みのみ</b>。160Wh以下・1人2個まで・端子をテープかビニール袋で絶縁。2026/4/24搭乗分から<b>収納棚に入れるのも禁止</b>で、座席ポケットなど手元に置く。機内での充電（バッテリーへも機器へも）も禁止",true],
+      ["予備のリチウム電池は単体で預けない","ヘッドランプ等の予備電池も同じ扱い。機器に内蔵されているものは預け入れ可"],
+      ["電源タップ／延長コード","宿のコンセントが足りない問題"]
+    ]},
+  spare:{title:"スペアパーツ・工具（宿に置いておく分）", when:"現地トラブル用",
+    intro:"現地のメカニックは有料かつ混む。自分で直せる範囲を広げておく。",
+    items:[
+      ["<b>トルクレンチ（六角ビット付き）</b>","<b>六角は箱の中なので、トルク管理をするならこれを別途手荷物で持つ</b>。トピークのコンボトルクレンチ&ビットなら2,200円前後・3〜6mm六角＋T25対応。<b>工具は預け入れ荷物へ</b>",true],
+      ["ファイバーグリップ（カーボン用の滑り止め）","<b>トルクを上げずに滑りを止められる</b>。シートポストが本番中に下がったら終わり。小さいチューブ1本"],
+      ["シートポストとDHバーの<b>締め付けトルク値と六角サイズを控える</b>","一般にハンドル周り6Nm・シートポスト最大5Nmだが、<b>パーツの刻印が最優先</b>。今日の試し梱包のときにメモして写真も撮る",true],
+      ["ウエス（多め）","組立時・梱包時の拭き取り。<b>パーツクリーナーは持っていかない</b> ― 新品チェーンを脱脂してしまうリスクの方が大きい"],
+      ["予備シューレース","クリートはシューズごと箱の中"],
+      ["予備チューブ（携行分とは別に）",""],
+      ["リアディレイラーハンガー（車種に合うもの）","折れると詰む部品"],
+      ["バーテープ or ビニールテープ、結束バンド",""],
+      
+      ["【箱の中】携帯ポンプ・空気圧計・予備チューブ×2・クイックリンク・チェーンカッター・六角×2","ツールバッグごと発送済み"]
+    ]},
+  stay:{title:"宿・移動・レース後", when:"9/11-9/14",
+    intro:"月曜の回収と発送まで含めて1本の予定。シャトルバスにバイクは載せられない。",
+    items:[
+      ["9/14 8:00-12:00 T2でバイク・ギアバッグ・PNを回収","回収されなかったバッグは処分される。本人確認できるもの持参",true],
+      ["9/14 9:30- ロールダウン／表彰式（木古内町中央公民館）","スロット獲得には本人が会場にいることが必須。クレカ現物と身分証も"],
+      ["9/14に木古内へ持っていくもの：再梱包の工具・軍手・テープ・結束バンド","前夜に宿でまとめておく",true],
+      ["9/14に木古内へ持っていくもの：箱に詰めて帰す荷物一式","朝の出発時点で仕分けを終えていること",true],
+      ["9/13夜のうちにウェットとウェアを干す","乾かすチャンスはこの一晩だけ"],
+      ["メダルとフィニッシャーシャツは手荷物に確保",""],
+      ["耳栓・アイマスク（前夜の睡眠確保）",""],
+      ["普段どおりの食事を確保する計画","現地の食事と酒に釣られない"],
+      ["現金少額（自販機・売店用）","タクシーや臨時電車はクレカのみのケースあり"]
+    ]},
+  ng:{title:"持っていっても使えないもの", when:"レギュレーション",
+    intro:"荷物から外す判断材料。知らずに持ち込むと失格・ペナルティになる。",
+    items:[
+      ["ディスクホイール ― 使用禁止","ノーマル／バトンはOK"],
+      ["シュノーケル・フィン・グローブ・パドル・プルブイ ― スイムで禁止","違反はDSQ"],
+      ["ヘッドホン／音楽再生 ― 全パート禁止","携帯の携行自体は可"],
+      ["バイク全体を覆うカバー ― 夜間ラッキングで禁止",""],
+      ["レーススーツの前側内側にボトルを入れる ― 失格",""],
+      ["トップチューブ上端から10cm超の搭載物",""],
+      ["家族や友人からの差し入れ・伴走 ― 外部サポートは禁止",""],
+      ["レース前に函館・江差自動車道を走る ― 法律で禁止、失格","スイム会場での時間外遊泳も出場権喪失"]
+    ]}
+};
+
+const ORDER = ["pre","kit","checkin","sat","sun","swim","bikebag","onbike","runbag","pnbike","pnrun","street","fuel","care","power","spare","stay","ng"];
+const KEY = "im-south-hokkaido-2026-packing";
+const TABKEY = "im-south-hokkaido-2026-tab";
+let state = {};
+try{ state = JSON.parse(localStorage.getItem(KEY) || "{}"); }catch(e){ state = {}; }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+function rowsHtml(key, items){
+  let h = '<ul>';
+  items.forEach(function(it,i){
+    const id = key+"-"+i;
+    h += '<li><label class="'+(it[2]?"must":"")+'">'+
+         '<input type="checkbox" data-id="'+id+'"'+(state[id]?" checked":"")+'>'+
+         '<span class="name">'+it[0]+'</span>'+
+         (it[1] ? '<span class="note">'+it[1]+'</span>' : '')+
+         '</label></li>';
+  });
+  return h + '</ul>';
+}
+
+ORDER.forEach(function(key){
+  const d = DATA[key];
+  const sec = document.querySelector('[data-list="'+key+'"]');
+  if(!sec) return;
+  let html = '<div class="tag"><h2>'+d.title+'</h2><span class="when">'+d.when+'</span></div><div class="panel">';
+  if(d.intro) html += '<p class="intro">'+d.intro+'</p>';
+  html += rowsHtml(key, d.items) + '</div>';
+  sec.innerHTML = html;
+});
+
+const boxUl = document.getElementById('boxlist');
+if(boxUl){ boxUl.outerHTML = rowsHtml("box", BOX); }
+const carryUl = document.getElementById('carrylist');
+if(carryUl){ carryUl.outerHTML = rowsHtml("carry", CARRY); }
+
+const boxes = Array.prototype.slice.call(document.querySelectorAll('input[type=checkbox]'));
+const countEl = document.getElementById('count');
+const fillEl = document.getElementById('fill');
+function refresh(){
+  const done = boxes.filter(function(b){return b.checked;}).length;
+  countEl.textContent = "持ち物 " + done + " / " + boxes.length;
+  fillEl.style.width = (boxes.length ? (done/boxes.length*100) : 0) + "%";
+}
+boxes.forEach(function(b){
+  b.addEventListener('change', function(){ state[b.dataset.id] = b.checked; save(); refresh(); if(typeof applyFilter==='function') applyFilter(); });
+});
+refresh();
+
+/* filter: 未チェックのみ = 持っていくもの */
+const packPanel = document.getElementById('panel-pack');
+const fAll = document.getElementById('f-all');
+const fOpen = document.getElementById('f-open');
+const fnote = document.getElementById('fnote');
+let onlyOpen = false;
+function applyFilter(){
+  const secs = packPanel.querySelectorAll('section');
+  let shown = 0;
+  secs.forEach(function(sec){
+    const items = sec.querySelectorAll('li');
+    let vis = 0;
+    items.forEach(function(li){
+      const cb = li.querySelector('input[type=checkbox]');
+      const hide = onlyOpen && cb && cb.checked;
+      li.hidden = hide;
+      if(!hide && cb) vis++;
+    });
+    if(onlyOpen){
+      sec.hidden = (vis === 0);
+      sec.querySelectorAll('.warn').forEach(function(w){ w.hidden = (vis === 0); });
+    } else {
+      sec.hidden = false;
+      sec.querySelectorAll('.warn').forEach(function(w){ w.hidden = false; });
+    }
+    shown += vis;
+  });
+  fAll.classList.toggle('on', !onlyOpen);
+  fOpen.classList.toggle('on', onlyOpen);
+  fnote.textContent = onlyOpen ? ("持っていくもの " + shown + " 点") : "";
+}
+fAll.addEventListener('click', function(){ onlyOpen = false; applyFilter(); });
+fOpen.addEventListener('click', function(){ onlyOpen = true; applyFilter(); });
+
+/* tabs */
+const tabs = [
+  {btn: document.getElementById('tab-sched'), panel: document.getElementById('panel-sched'), id:'sched'},
+  {btn: document.getElementById('tab-pack'),  panel: document.getElementById('panel-pack'),  id:'pack'}
+];
+function selectTab(id){
+  tabs.forEach(function(t){
+    const on = t.id === id;
+    t.btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    t.panel.hidden = !on;
+  });
+  try{ localStorage.setItem(TABKEY, id); }catch(e){}
+}
+tabs.forEach(function(t){ t.btn.addEventListener('click', function(){ selectTab(t.id); }); });
+let saved = null;
+try{ saved = localStorage.getItem(TABKEY); }catch(e){}
+selectTab(saved === 'pack' ? 'pack' : 'sched');
+</script>

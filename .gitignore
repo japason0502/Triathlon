@@ -214,3 +214,7 @@ index.html
 
 # build_blog_manifest.py が生成する（CI のビルド時にのみ存在すれば良い）
 sitemap.xml
+
+# 公式ガイドPDF・vlog素材は公開リポジトリに入れない（2026-10-25）
+アスリートガイド/*.pdf
+vlog/*.pptx
